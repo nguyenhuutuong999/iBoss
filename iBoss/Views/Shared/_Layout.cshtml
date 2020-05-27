@@ -1,0 +1,522 @@
+﻿
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>iBoss</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script src="https://kit.fontawesome.com/007bd262c1.js" crossorigin="anonymous"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <style>
+        body {
+            max-width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            top: 0;
+            background: rgba(233, 227, 227, 0.45);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+
+        nav {
+            width: 100%;
+            position: fixed;
+            margin: 0;
+            z-index: 1;
+            box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03), 0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03), 0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05), 0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03)
+        }
+
+        .main-page {
+            width: 100%;
+            left: 0;
+            max-height: 100%;
+            margin: 0;
+        }
+
+        .side-bar {
+            background: rgba(238, 234, 234, 0.45);
+            max-height: 100%;
+            box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03);
+            color: black;
+            margin-top: 50px;
+            height: 100vh;
+            padding: 0;
+        }
+
+            .side-bar a {
+                color: black;
+                text-decoration: none;
+                list-style: none;
+            }
+
+        .button-link {
+            width: 100%;
+            height: 24%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: rgb(255, 255, 255);
+            border-radius: 0 10px 10px 0;
+            border-bottom: 1px rgb(14, 12, 12);
+            z-index: 1;
+        }
+
+            .button-link:hover {
+                background-color: rgba(210, 207, 221, 0.45);
+                background-image: linear-gradient(90deg, rgba(194, 179, 179, 0.45), rgba(255, 255, 255, 0.45));
+                transition: background-color 1s;
+            }
+
+
+        .active {
+            background-color: rgba(210, 207, 221, 0.45);
+            background-image: linear-gradient(90deg, rgba(194, 179, 179, 0.45), rgba(255, 255, 255, 0.45));
+        }
+
+        .main-content {
+            height: 100vh;
+            position: relative;
+            margin: 0;
+        }
+
+        .list {
+            background: white;
+            height: 80vh;
+            margin: 100px 10px;
+        }
+
+        .chart {
+            flex: 0 0 22%;
+            padding: 0;
+            max-width: 35%;
+            height: 60vh;
+            margin: 100px 0 100px 10px;
+        }
+
+        #genderChart {
+            padding: 0;
+            margin: 0;
+            height: 50%;
+        }
+
+        #numberChart {
+            padding: 0;
+            margin: 0;
+            height: 50%;
+            margin-top: 20px;
+        }
+
+        .search-container {
+            margin: 5px 0 10px 18%;
+            width: 400px;
+        }
+
+            .search-container input[type=text] {
+                padding: 10px;
+                margin-top: 8px;
+                font-size: 17px;
+                border-radius: 50px;
+                z-index: 1;
+                width: 20%;
+                height: 50px;
+                border: none;
+                position: absolute;
+                background: rgba(233, 227, 227, 0.45);
+            }
+
+            .search-container button {
+                float: right;
+                padding: 8px 14px;
+                margin-top: 10px;
+                margin-right: 10px;
+                margin-left: 0px;
+                z-index: 2;
+                background: #ddd;
+                font-size: 21px;
+                border: none;
+                cursor: pointer;
+                position: relative;
+            }
+
+                .search-container button:hover {
+                    background: #ccc;
+                }
+
+        .switch {
+            top: 8px;
+            margin-left: 92%;
+        }
+
+        .name-logo {
+            margin-left: 6%;
+        }
+
+        .exit-button {
+            margin-left: 96%;
+        }
+
+        .notification {
+            margin-left: 80.5%;
+        }
+
+        .item-nav {
+            width: 10%;
+            position: absolute;
+            margin-top: 15px;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgb(240, 230, 230);
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+        input:checked + .slider {
+            background-color: rgb(93, 107, 119);
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+
+        .main-hel ul li {
+            list-style: none;
+            width: 32%;
+            height: 45px;
+            border: none;
+            display: inline-block;
+            text-align: center;
+            border-radius: 7px;
+            padding: 10px;
+        }
+
+            .main-hel ul li a {
+                text-decoration: none;
+                color: black;
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+        .box-block {
+            left: 81%;
+            top: 9%;
+            width: 290px;
+            height: 500px;
+            background-color: white;
+            position: fixed;
+            display: none;
+        }
+    </style>
+    <!-- containner -->
+    <div class="container-xl">
+        <nav class="nav bg-white">
+            <h1 class="item-nav name-logo">iBoss</h1>
+            <div class="search-container">
+                <form action="/action_page.php">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button type="submit" style="border-radius: 50px;"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+            <label class="item-nav switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <a href="#" class="item-nav exit-button">
+                <i class="fas fa-sign-out-alt fa-3x" style="color:rgb(176, 184, 190)"></i>
+            </a>
+            <a href="#" class=" item-nav notification" id="inform">
+                <i class="fas fa-bell fa-3x" style="color:rgb(176, 184, 190)"></i>
+            </a>
+            <div class="box-block">
+                <h6 class="dropdown-header">
+                    Alerts Center
+                </h6>
+
+
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+            </div>
+        </nav>
+
+
+        <div class="row main-page ">
+
+            <!-- side bar -->
+            <div class="col-md-2 side-bar ">
+
+                <a href="home" class="button-link @(ViewBag.Current == "home" ? "active" : "") " id="payroll">
+                    <i class="fas fa-home fa-2x"></i>
+                    <h3>Home</h3>
+                </a>
+
+                <a href="payroll" class="button-link @(ViewBag.Current == "payroll" ? "active" : "") " id="payroll">
+                    <i class="fas fa-money-check fa-2x"></i>
+                    <h3>Payroll</h3>
+                </a>
+
+                <a href="human" class="button-link @(ViewBag.Current == "human" ? "active" : "") " id="human">
+                    <i class="fas fa-users fa-2x"></i>
+                    <h3>Human</h3>
+                </a>
+
+                <a href="event" class="button-link  @(ViewBag.Current == "event" ? "active" : "") " id="event">
+                    <i class="far fa-calendar-check fa-3x"></i>
+                    <h3>Event</h3>
+                </a>
+
+
+
+
+
+            </div>
+            <!-- main content -->
+            <div class="col-md-10 main-content  row">
+
+                <div class="list col-sm-9">
+                    @RenderBody()
+                    @* </div>
+                        <div class="chart col-md-3">
+                            <div id="genderChart"></div>
+                            <div id="numberChart"></div>
+
+                            <script>
+                                let myConfig = {
+
+                                    type: 'pie',
+                                    scale: {
+                                        'size-factor': 0.9
+                                    },
+                                    title: {
+                                        text: "Gender Chart"
+                                    },
+                                    legend: {
+                                        layout: "2x1", //row x column
+                                        x: "75%",
+                                        y: "10%",
+                                    },
+
+                                    plot: {
+                                        'value-box': {
+                                            'font-family': "Georgia",
+                                            'font-size': 14,
+                                            'font-weight': "normal",
+                                            'offset-r': "20%",
+
+
+                                        },
+                                        animation: {
+                                            effect: "2",
+                                            method: "3",
+                                            sequence: "ANIMATION_BY_PLOT",
+                                            speed: "ANIMATION_FAST"
+                                        }
+                                    },
+                                    series: [
+                                        {
+                                            values: [59],
+                                            'background-color': "#8c8c8c",
+                                            'text': "Female"
+                                        },
+                                        {
+                                            values: [30],
+                                            'background-color': "#575656",
+                                            'text': "Male"
+                                        },
+
+                                    ]
+
+                                };
+                                let myConfig1 = {
+
+                                    type: 'pie',
+                                    scale: {
+                                        'size-factor': 0.9
+                                    },
+                                    title: {
+                                        text: "Gender Chart"
+                                    },
+                                    legend: {
+                                        layout: "2x1", //row x column
+                                        x: "75%",
+                                        y: "10%",
+                                    },
+
+                                    plot: {
+                                        'value-box': {
+                                            'font-family': "Georgia",
+                                            'font-size': 14,
+                                            'font-weight': "normal",
+                                            'offset-r': "20%",
+
+
+                                        },
+                                        animation: {
+                                            effect: "2",
+                                            method: "3",
+                                            sequence: "ANIMATION_BY_PLOT",
+                                            speed: "ANIMATION_FAST"
+                                        }
+                                    },
+                                    series: [
+                                        {
+                                            values: [30],
+                                            'background-color': "#8c8c8c",
+                                            'text': "Female"
+                                        },
+                                        {
+                                            values: [59],
+                                            'background-color': "#575656",
+                                            'text': "Male"
+                                        },
+
+                                    ]
+
+
+                                }
+
+                                // Render Method[3]
+                                zingchart.render(
+                                    {
+                                        id: 'genderChart',
+                                        data: myConfig,
+                                        height: "100%",
+                                    },
+                                );
+                                zingchart.render(
+                                    {
+                                        id: 'numberChart',
+                                        data: myConfig1,
+                                        height: "100%",
+                                    },
+                                );
+                            </script>
+                        </div>*@
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+
+</script>
+<script>
+    $("#inform").click(function () {
+
+        var id = (new Date).getMonth() + 1;
+        alert(id)
+          $.ajax({
+                type: "POST",
+                url: "@Url.Action("Inform", "Event")",
+                data: { id: id },
+                dataType: "json",
+
+              success: function (data) {
+                  alert(data)
+
+                },
+                error: function () {
+                    alert("Error. Can't sent request !!!");
+
+                },
+            })
+
+
+
+        $(".box-block").attr("style", "display:block");
+
+    });
+
+    $(".main-page").click(function (e) {
+        $(".box-block").attr("style", "display:none");
+    });
+
+    $(document).ready(function () {
+
+        $(".button-link").click(function () {
+            $('.button-link').removeClass("active");
+            $(this).addClass("active");
+
+
+        })
+    });
+    $(document).ready(function () {
+        $(".tab ").click(function () {
+            $('.tab').removeClass("active");
+            $(this).addClass("active");
+
+            if ($(this).hasClass('tab-ques')) {
+                $('.tab-content').hide();
+                $('.content-ques').show();
+            } else if ($(this).hasClass('tab-des')) {
+                $('.tab-content').hide();
+                $('.content-des').show();
+            } else if ($(this).hasClass('tab-acc')) {
+                $('.tab-content').hide();
+                $('.content-acc').show();
+            }
+        })
+    })
+</script>

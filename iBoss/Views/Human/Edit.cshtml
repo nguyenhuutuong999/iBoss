@@ -1,0 +1,71 @@
+﻿@model iBoss.Models.Entities.Human.ModelViewHuman
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ModelViewHuman</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EMPLOYEE_ID" />
+            <div class="form-group">
+                <label asp-for="CURRENT_FIRST_NAME" class="control-label"></label>
+                <input asp-for="CURRENT_FIRST_NAME" class="form-control" />
+                <span asp-validation-for="CURRENT_FIRST_NAME" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CURRENT_LAST_NAME" class="control-label"></label>
+                <input asp-for="CURRENT_LAST_NAME" class="form-control" />
+                <span asp-validation-for="CURRENT_LAST_NAME" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BIRTH_DATE" class="control-label"></label>
+                <input asp-for="BIRTH_DATE" class="form-control" />
+                <span asp-validation-for="BIRTH_DATE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CURRENT_ADDRESS_1" class="control-label"></label>
+                <input asp-for="CURRENT_ADDRESS_1" class="form-control" />
+                <span asp-validation-for="CURRENT_ADDRESS_1" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CURRENT_GENDER" /> @Html.DisplayNameFor(model => model.CURRENT_GENDER)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="CURRENT_PHONE_NUMBER" class="control-label"></label>
+                <input asp-for="CURRENT_PHONE_NUMBER" class="form-control" />
+                <span asp-validation-for="CURRENT_PHONE_NUMBER" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CURRENT_PERSONAL_EMAIL" class="control-label"></label>
+                <input asp-for="CURRENT_PERSONAL_EMAIL" class="form-control" />
+                <span asp-validation-for="CURRENT_PERSONAL_EMAIL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HIRE_DATE_FOR_WORKING" class="control-label"></label>
+                <input asp-for="HIRE_DATE_FOR_WORKING" class="form-control" />
+                <span asp-validation-for="HIRE_DATE_FOR_WORKING" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH" class="control-label"></label>
+                <input asp-for="NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH" class="form-control" />
+                <span asp-validation-for="NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -12,6 +12,6 @@ namespace iBoss.Models.Entities.Human
         public decimal? NumberDaysActualOfWorkingPerMonth { get; set; }
         public decimal? TotalNumberVacationWorkingDaysPerMonth { get; set; }
 
-        public virtual Employment Employment { get; set; }
+        public virtual EMPLOYEMENT Employment { get; set; }
     }
 }

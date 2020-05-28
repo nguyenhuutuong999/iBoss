@@ -19,7 +19,7 @@ namespace iBoss.Controllers
             return View(_manageHuman.getAll());
             
         }
-      
+
         public IActionResult Detail(int id)
         {
             var model = _manageHuman.Detail(id);
@@ -28,9 +28,9 @@ namespace iBoss.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            ViewBag.getPhongBanEdit = _manageHuman.getAllPhongBan();
+            //ViewBag.getPhongBanEdit = _manageHuman.getAllPhongBan();
 
-            var model = _manageHuman.ViewDetail(id);
+            var model = _manageHuman.Detail(id);
             return View(model);
         }
         [HttpPost]
@@ -46,12 +46,10 @@ namespace iBoss.Controllers
             return View();
         }
         [HttpGet]
-       public IActionResult Create()
+        public IActionResult Create()
         {
-            ViewBag.getPhongBan = _manageHuman.getAllPhongBan();
-   
+
             return View();
-         
         }
         [HttpPost]
         public IActionResult Create(ModelViewHuman request)
@@ -64,18 +62,18 @@ namespace iBoss.Controllers
             }
             return View();
         }
-        [HttpGet]
-        public IActionResult Delete(int id)
-        {
-            var model = _manageHuman.Detail(id);
-            return View(model);
-        }
-        [HttpPost, ActionName("Delete")]
-        public IActionResult ConfirmDelete(int id)
-        {
-            _manageHuman.Delete(id);
-            return RedirectToAction("index");
-        }
+        // [HttpGet]
+        // public IActionResult Delete(int id)
+        // {
+        //     var model = _manageHuman.Detail(id);
+        //     return View(model);
+        // }
+        // [HttpPost, ActionName("Delete")]
+        // public IActionResult ConfirmDelete(int id)
+        // {
+        //     _manageHuman.Delete(id);
+        //     return RedirectToAction("index");
+        // }
 
     }
 }

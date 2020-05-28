@@ -82,6 +82,7 @@ namespace iBoss.WebApp.Controllers
      
         public IActionResult Index()
         {
+            ViewBag.Current = "payroll";
             var model = _managePayroll.getAll();
             return View(model);
         }

@@ -13,9 +13,7 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\AdminController.cs" />
-    <Compile Remove="Controllers\EventController.cs" />
     <Compile Remove="Controllers\HomeController.cs" />
-    <Compile Remove="Controllers\HumanController.cs" />
   </ItemGroup>
 
   <ItemGroup>

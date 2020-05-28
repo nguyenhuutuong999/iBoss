@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace iBoss.Models.Entities.Human
 {
@@ -7,14 +8,14 @@ namespace iBoss.Models.Entities.Human
     {
         public BenefitPlans()
         {
-            Personal = new HashSet<Personal>();
+            Personal = new HashSet<PERSONAL>();
         }
-
+        [Key]
         public decimal BenefitPlansId { get; set; }
         public string PlanName { get; set; }
         public decimal? Deductable { get; set; }
         public decimal? PercentageCopay { get; set; }
 
-        public virtual ICollection<Personal> Personal { get; set; }
+        public virtual ICollection<PERSONAL> Personal { get; set; }
     }
 }

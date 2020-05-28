@@ -46,16 +46,7 @@ namespace iBoss.Controllers
           
         }
         
-        [HttpGet]
-        public IActionResult Birthday()
-        {
-            ViewBag.Current = "event";
-         
-            var nv = _managePayroll.getAllNhanVien();
-           
-            return View(nv);
-
-        }
+       
         [HttpPost]
         public IActionResult Inform(int id)
         {

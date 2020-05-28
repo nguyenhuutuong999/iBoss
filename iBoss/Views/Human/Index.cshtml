@@ -1,0 +1,69 @@
+﻿@model IEnumerable<iBoss.Models.Entities.Human.PERSONAL>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EMPLOYEE_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CURRENT_FIRST_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CURRENT_LAST_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BIRTH_DATE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CURRENT_ADDRESS_1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CURRENT_GENDER)
+            </th>
+           
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMPLOYEE_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CURRENT_FIRST_NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CURRENT_LAST_NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BIRTH_DATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CURRENT_ADDRESS_1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CURRENT_GENDER)
+            </td>
+          
+           
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EMPLOYEE_ID">Edit</a> |
+                <a asp-action="Detail" asp-route-id="@item.EMPLOYEE_ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.EMPLOYEE_ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

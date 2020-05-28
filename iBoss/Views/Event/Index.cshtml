@@ -1,0 +1,196 @@
+﻿
+@{
+    ViewData["Title"] = "Birthday";
+}
+
+<style>
+    .tab-content {
+        margin: 30px 40px;
+    }
+</style>
+
+
+<section class="main-hel">
+    <div>
+        <h1 class="hel">Infor</h1>
+        <hr>
+    </div>
+    <ul>
+        <li class="active tab tab-ques">
+            <a href="javascript:;" class="">DATE OFF BIRTH</a>
+
+        </li>
+        <li class="tab tab-des">
+            <a href="javascript:;" class="">ABSENT</a>
+
+        </li>
+        <li class="tab tab-acc">
+            <a href="javascript:;" class="tab-acc">HOLIDAY</a>
+
+        </li>
+    </ul>
+    <div class="clear"></div>
+    <article id="birthday" class="tab-content content-ques">
+        <form method="POST" action="Birthday">
+            <label class="control-label">Month</label>
+            <select name="agent_id" id="selectMonth">
+
+                <option value=1>January</option>
+                <option value=2>Febuary</option>
+                <option value=3>March</option>
+                <option value=4>April</option>
+                <option value=5>May</option>
+                <option value=6>June</option>
+                <option value=7>July</option>
+                <option value=8>August</option>
+                <option value=9>September</option>
+                <option value=10>October</option>
+                <option value=11>November</option>
+                <option value=12>December</option>
+            </select>
+
+        </form>
+
+
+
+    </article>
+    <div class="clear"></div>
+    <article class="tab-content content-des" style="display: none">
+        <h1 class="title">DO YOU HAVE A NPL ACCOUNT</h1>
+
+    </article>
+    <article class="tab-content content-acc" style="display:none">
+        <h1 class="title">DO YOU HAVE A NPL ACCOUNT</h1>
+    </article>
+    <div class="clear"></div>
+</section>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+    //$('form').submit(function () {
+    //    $("#selectMonth").change(function () {
+    //        var month = $("#selectMonth").val();
+    //        alert(month);
+    //    })
+    //});
+    $(function () {
+        $("#selectMonth").change(function () {
+
+            var id = $("#selectMonth").val();
+            
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Birthday", "Event")",
+                data: { id: id },
+                dataType: "json",
+                
+                success: function (data) {
+                    
+                    $("#table-birthday").remove();
+                    var rows = '';
+
+                    //duyệt vòng lặp lấy thông tin ngày sinh
+                    $.each(data, function (i, item) {
+
+                        //format date
+                        const dateTime = item.birtH_DATE;
+                        const parts = dateTime.split(/[- T :]/);
+                        var month = 0;
+
+                        switch (parts[1]) {
+                            case '01':
+                                month = 'January';
+                                break;
+                            case '02':
+                                month = 'Febuary';
+                                break;
+                            case '03':
+                                month = 'March';
+                                break;
+                            case '04':
+                                month = 'April';
+                                break;
+                            case '05':
+                                month = 'May';
+                                break;
+                            case '06':
+                                month = 'June';
+                                break;
+
+                            case '07':
+                                month = 'July';
+                                break;
+                            case '08':
+                                month = 'August';
+                                break;
+                            case '09':
+                                month = 'September';
+                                break;
+                            case '10':
+                                month = 'October';
+                                break;
+                            case '11':
+                                month = 'November';
+                                break;
+                            case '12':
+                                month = 'December';
+                                break;
+
+                        }
+
+                        const wanted = `${month}, ${parts[2]} ${parts[0]}`;
+
+                        rows +=
+                            '                        <tr>' +
+
+                        '                            <td><i class="fas fa-birthday-cake fa-2x"></i></td>' +
+                            '                            <td>' + item.employeE_ID +
+                        '                            </td>' +
+                        '                            <td>' + item.currenT_FIRST_NAME +
+                        '                            </td>' +
+                        '                            <td>' + item.currenT_LAST_NAME +
+                        '                            </td>' +
+
+                        '                            <td>' + wanted +
+                            '                            </td>' +
+                            '                           ' +
+                            '                        </tr>';
+                    });
+
+
+
+                    var myvar =
+                        '<table id = "table-birthday" class="table">' +
+                        '                <thead>'+
+                        '                    <tr>' +
+                        '                        <th></th>' +
+                        '                        <th>ID</th>' +
+                        '                        <th>Family Name</th>'+
+                        '                        <th>First Name</th>' +
+
+                        '                        <th>DateOfBirth</th>'+
+                        '                    </tr>'+
+                        '                </thead>'+
+                        '                <tbody>' +
+                        rows
+                        +
+
+                        '                </tbody>'+
+                        '            </table>';
+
+
+
+                    $("#birthday").append(myvar);
+
+                },
+                error: function () {
+                    alert("Error. Can't sent request !!!");
+
+                },
+            })
+        })
+    })
+
+
+</script>

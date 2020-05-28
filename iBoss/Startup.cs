@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using iBoss.Application.Human;
 using iBoss.Application.Payroll;
 using iBoss.Models.EF;
 using Microsoft.AspNetCore.Builder;
@@ -29,10 +30,12 @@ namespace iBoss
           
 
             services.AddDbContext<PayrollDbContext>(options => options.UseMySql(Configuration.GetConnectionString("mySQLConnectionString")));
+            services.AddDbContext<HumanDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("sqlServerConnectionString")));
 
             services.AddMvc();
             services.AddTransient<IManagePayroll, ManagePayroll>();
-        
+            services.AddTransient<IManageHuman, ManageHuman>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,7 +62,7 @@ namespace iBoss
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Payroll}/{action=Index}/{id?}");
+                    pattern: "{controller=Event}/{action=Index}/{id?}");
             });
         }
     }

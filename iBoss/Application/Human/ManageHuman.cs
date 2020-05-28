@@ -18,59 +18,102 @@ namespace iBoss.Application.Human
             _context = context;
         }
 
-        public IEnumerable<ModelViewHuman> getAll()
+        public IEnumerable<PERSONAL> getAll()
         {
+           return  _context.PERSONALS.ToList<PERSONAL>();
 
-            var data = _context.nhanviens.Join(
-                _context.phongbans,
+            //var data = _context.nhanviens.Join(
+            //    _context.phongbans,
 
-                nhanvien => nhanvien.phongban.MAPHONGBAN,
-                phongban => phongban.MAPHONGBAN,
-                (nhanvien, phongban) => new ModelViewHuman
-                {
+            //    nhanvien => nhanvien.phongban.MAPHONGBAN,
+            //    phongban => phongban.MAPHONGBAN,
+            //    (nhanvien, phongban) => new Personal
+            //    {
 
-                    MANHANVIEN = nhanvien.MANHANVIEN,
-                    MAPHONGBAN = nhanvien.MAPHONGBAN,
-                    HO = nhanvien.HO,
-                    TEN = nhanvien.TEN,
-                    NGAYSINH = Convert.ToDateTime(nhanvien.NGAYSINH),
-                    GIOITINH = nhanvien.GIOITINH,
-                    DIACHI = nhanvien.DIACHI,
-                    TENPHONGBAN = phongban.TENPHONGBAN,
-                }
+            //        MANHANVIEN = nhanvien.MANHANVIEN,
+            //        MAPHONGBAN = nhanvien.MAPHONGBAN,
+            //        HO = nhanvien.HO,
+            //        TEN = nhanvien.TEN,
+            //        NGAYSINH = Convert.ToDateTime(nhanvien.NGAYSINH),
+            //        GIOITINH = nhanvien.GIOITINH,
+            //        DIACHI = nhanvien.DIACHI,
+            //        TENPHONGBAN = phongban.TENPHONGBAN,
+            //    }
 
-                ).ToList();
-            return data;
+            //    ).ToList();
+            //return data;
         }
         public void Add(ModelViewHuman request)
         {
-            var maNhanVien = _context.nhanviens.Count<nhanvien>()+1; 
+            var maNhanVien = _context.PERSONALS.Count<PERSONAL>() + 1;
 
-            nhanvien nhanvien = new nhanvien
+            EMPLOYEMENT nhanvien = new EMPLOYEMENT
             {
-                MANHANVIEN = maNhanVien,
-                HO = request.HO,
-                TEN = request.TEN,
-                NGAYSINH = request.NGAYSINH,
-                GIOITINH = request.GIOITINH,
-                DIACHI = request.DIACHI,
-                MAPHONGBAN = request.MAPHONGBAN,
+                EMPLOYMENT_ID = maNhanVien,
+                HIRE_DATE_FOR_WORKING = request.HIRE_DATE_FOR_WORKING,
+                NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH = request.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH,
             };
-            _context.nhanviens.Add(nhanvien);
+            _context.EMPLOYEMENTS.Add(nhanvien);
             _context.SaveChanges();
+
+          
+
+            PERSONAL canhan = new PERSONAL
+            {
+                
+                EMPLOYEE_ID = maNhanVien,
+                CURRENT_FIRST_NAME = request.CURRENT_FIRST_NAME,
+                CURRENT_LAST_NAME = request.CURRENT_LAST_NAME,
+                BIRTH_DATE = request.BIRTH_DATE,
+                CURRENT_ADDRESS_1 = request.CURRENT_ADDRESS_1,
+                CURRENT_GENDER = request.CURRENT_GENDER,
+                CURRENT_PHONE_NUMBER = request.CURRENT_PHONE_NUMBER,
+                CURRENT_PERSONAL_EMAIL = request.CURRENT_PERSONAL_EMAIL,
+            };
+            _context.PERSONALS.Add(canhan);
+            _context.SaveChanges();
+
 
         }
         public void Update(ModelViewHuman request)
         {
+            var canhan = _context.PERSONALS.FromSqlRaw("SELECT * FROM PERSONAL WHERE PERSONAL_ID ='" + request.EMPLOYEE_ID + "' ").First<PERSONAL>();
+            canhan.CURRENT_FIRST_NAME = request.CURRENT_FIRST_NAME;
+            canhan.CURRENT_LAST_NAME = request.CURRENT_LAST_NAME;
+            canhan.BIRTH_DATE = request.BIRTH_DATE;
+            canhan.CURRENT_ADDRESS_1 = request.CURRENT_ADDRESS_1;
+            canhan.CURRENT_GENDER = request.CURRENT_GENDER;
+            canhan.CURRENT_PHONE_NUMBER = request.CURRENT_PHONE_NUMBER;
+            canhan.CURRENT_PERSONAL_EMAIL = request.CURRENT_PERSONAL_EMAIL;
 
-            var nhanvien = _context.nhanviens.Find(request.MANHANVIEN);
-            nhanvien.HO = request.HO;
-            nhanvien.TEN = request.TEN;
-            nhanvien.NGAYSINH = request.NGAYSINH;
-            nhanvien.GIOITINH = request.GIOITINH;
-            nhanvien.DIACHI = request.DIACHI;
-            nhanvien.MAPHONGBAN = request.MAPHONGBAN;
+
+            var nhanvien = _context.EMPLOYEMENTS.Find(request.EMPLOYEE_ID);
+            nhanvien.HIRE_DATE_FOR_WORKING = request.HIRE_DATE_FOR_WORKING;
+            nhanvien.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH = request.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH;
+
             _context.SaveChanges();
+        }
+        public ModelViewHuman Detail(int id)
+        {
+
+            var nhanvien = _context.EMPLOYEMENTS.Find(id);
+
+            var canhan = _context.PERSONALS.FromSqlRaw("SELECT * FROM PERSONAL where EMPLOYEE_ID ='" + id + "'").First<PERSONAL>();
+            ModelViewHuman model = new ModelViewHuman
+            {
+
+                EMPLOYEE_ID = id,
+                CURRENT_FIRST_NAME = canhan.CURRENT_FIRST_NAME,
+                CURRENT_LAST_NAME = canhan.CURRENT_LAST_NAME,
+                BIRTH_DATE = canhan.BIRTH_DATE,
+                CURRENT_ADDRESS_1 = canhan.CURRENT_ADDRESS_1,
+                CURRENT_GENDER = canhan.CURRENT_GENDER,
+                CURRENT_PHONE_NUMBER = canhan.CURRENT_PHONE_NUMBER,
+                CURRENT_PERSONAL_EMAIL = canhan.CURRENT_PERSONAL_EMAIL,
+                HIRE_DATE_FOR_WORKING = nhanvien.HIRE_DATE_FOR_WORKING,
+                NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH = nhanvien.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH,
+            };
+            return model;
         }
 
         public bool Delete(int request)
@@ -87,26 +130,7 @@ namespace iBoss.Application.Human
             }
         }
 
-        public ModelViewHuman Detail(int id)
-        {
-            
-            var nhanvien = _context.nhanviens.Find(id);
-            var maPhongBan = nhanvien.MAPHONGBAN;
-            var phongban = _context.phongbans.FromSqlRaw("SELECT * FROM phongban where MAPHONGBAN ='" + maPhongBan + "'").First<phongban>();
-            ModelViewHuman model = new ModelViewHuman
-            {
-                MANHANVIEN = id,
-                MAPHONGBAN = nhanvien.MAPHONGBAN,
-                HO = nhanvien.HO,
-                TEN = nhanvien.TEN,
-                NGAYSINH = nhanvien.NGAYSINH,
-                GIOITINH  = nhanvien.GIOITINH,
-                DIACHI = nhanvien.DIACHI,
-                TENPHONGBAN = phongban.TENPHONGBAN,
-            };
-            return model;
-        }
-        
+       
        
 
         //get PhongBan's List to show select option of TENPHONGBAN
@@ -116,29 +140,10 @@ namespace iBoss.Application.Human
         }
         
        
-        public ModelViewHuman ViewDetail(int request)
+       
+        public List<PERSONAL> getBirthDayNhanVien(int id)
         {
-            var nhanvien = _context.nhanviens.Find(request);
-
-            var pban = _context.phongbans.FromSqlRaw("SELECT * FROM phongban where MAPHONGBAN ='" + nhanvien.MAPHONGBAN + "'").First<phongban>();
-            
-            ModelViewHuman model = new ModelViewHuman
-            {
-                MANHANVIEN = request,
-                MAPHONGBAN = nhanvien.MAPHONGBAN,
-                HO = nhanvien.HO,
-                TEN = nhanvien.TEN,
-                NGAYSINH = Convert.ToDateTime(nhanvien.NGAYSINH),
-                GIOITINH = nhanvien.GIOITINH,
-                DIACHI = nhanvien.DIACHI,
-                TENPHONGBAN = pban.TENPHONGBAN,
-
-            };
-            return model;
-        }
-        public List<nhanvien> getBirthDayNhanVien(int id)
-        {
-            return _context.nhanviens.FromSqlRaw("SELECT * FROM nhanvien WHERE MONTH(NGAYSINH) = '" + id + "'").ToList<nhanvien>();
+            return _context.PERSONALS.FromSqlRaw("SELECT * FROM PERSONAL WHERE MONTH(BIRTH_DATE) = '" + id + "'").ToList<PERSONAL>();
         }
         
 

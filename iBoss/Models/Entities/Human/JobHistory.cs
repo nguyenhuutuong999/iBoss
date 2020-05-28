@@ -16,6 +16,6 @@ namespace iBoss.Models.Entities.Human
         public string Location { get; set; }
         public short? TypeOfWork { get; set; }
 
-        public virtual Employment Employment { get; set; }
+        public virtual EMPLOYEMENT Employment { get; set; }
     }
 }

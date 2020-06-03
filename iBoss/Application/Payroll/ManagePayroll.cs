@@ -23,7 +23,30 @@ namespace iBoss.Application.Payroll
         public List<payrates> getAllPayrate() {
             return _context.payratess.ToList<payrates>();
         }
+        public ModelViewPayroll Detail(int id)
+        {
+            var nhanVien = _context.employees.Find(id);
+            var luong = _context.payratess.Find(nhanVien.PayRatesidPayRates);
 
+            ModelViewPayroll mdp = new ModelViewPayroll
+            {
+                idEmployee = nhanVien.idEmployee,
+                EmployeeNumber = nhanVien.EmployeeNumber,
+                LastName = nhanVien.LastName,
+                FirstName = nhanVien.FirstName,
+                SSN = nhanVien.SSN,
+                PayRate = nhanVien.PayRate,
+                VacationDays = nhanVien.VacationDays,
+
+                PayRateName = luong.PayRateName,
+                Value = luong.Value,
+                TaxPercentage = luong.TaxPercentage,
+                PayType = luong.PayType,
+                PayAmount = luong.PayAmount,
+                PTLevelC = luong.PTLevelC,
+            };
+            return mdp;
+        }
         public void Add(ModelViewPayroll request)
         {
             var idE = _context.employees.Count<employee>() + 1;
@@ -75,32 +98,7 @@ namespace iBoss.Application.Payroll
         }
 
 
-        public ModelViewPayroll Detail(int id)
-        {
-            var nhanVien = _context.employees.Find(id);
-            var luong = _context.payratess.Find(nhanVien.PayRatesidPayRates);
-
-
-
-            ModelViewPayroll mdp = new ModelViewPayroll
-            {
-                idEmployee = nhanVien.idEmployee,
-                EmployeeNumber = nhanVien.EmployeeNumber,
-                LastName = nhanVien.LastName,
-                FirstName = nhanVien.FirstName,
-                SSN = nhanVien.SSN,
-                PayRate = nhanVien.PayRate,
-                VacationDays = nhanVien.VacationDays,
-
-                PayRateName = luong.PayRateName,
-                Value = luong.Value,
-                TaxPercentage = luong.TaxPercentage,
-                PayType = luong.PayType,
-                PayAmount = luong.PayAmount,
-                PTLevelC = luong.PTLevelC,
-            };
-            return mdp;
-        }
+       
 
         public IEnumerable<ModelViewPayroll> getAll()
         {

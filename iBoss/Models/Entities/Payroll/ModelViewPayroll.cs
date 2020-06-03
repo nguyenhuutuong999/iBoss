@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,11 +13,14 @@ namespace iBoss.Models.Entities.Payroll
 
         [Key]
         public int idEmployee { get; set; }
+        [DisplayName("ID")]
         public int EmployeeNumber { get; set; }
 
         [StringLength(50)]
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
         [StringLength(50)]
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
         public decimal SSN { get; set; }
 

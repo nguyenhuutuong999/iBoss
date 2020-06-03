@@ -143,6 +143,18 @@
                 position: absolute;
                 background: rgba(233, 227, 227, 0.45);
             }
+            .search-container input[type=number] {
+                padding: 10px;
+                margin-top: 8px;
+                font-size: 17px;
+                border-radius: 50px;
+                z-index: 1;
+                width: 20%;
+                height: 50px;
+                border: none;
+                position: absolute;
+                background: rgba(233, 227, 227, 0.45);
+            }
 
             .search-container button {
                 float: right;
@@ -265,7 +277,7 @@
             height: 500px;
             background-color: white;
             position: fixed;
-            display: none;
+            display: block;
         }
     </style>
     <!-- containner -->
@@ -273,9 +285,10 @@
         <nav class="nav bg-white">
             <h1 class="item-nav name-logo">iBoss</h1>
             <div class="search-container">
-                <form action="/action_page.php">
-                    <input type="text" placeholder="Search.." name="search">
+                <form asp-controller="Home" asp-action="Search" method="get">
+                    <input type="number" placeholder="Search.." name="search" value="@ViewBag.key">
                     <button type="submit" style="border-radius: 50px;"><i class="fa fa-search"></i></button>
+                    @*<input type="submit" value="Filter" />*@
                 </form>
             </div>
             <label class="item-nav switch">
@@ -289,12 +302,15 @@
                 <i class="fas fa-bell fa-3x" style="color:rgb(176, 184, 190)"></i>
             </a>
             <div class="box-block">
-                <h6 class="dropdown-header">
-                    Alerts Center
+                <h6 >
+                   Notification
                 </h6>
+                <div class="row">
+                    <div class="col-2" style="color:#6f5f5f"><i class="fas fa-birthday-cake fa-2x"></i></div>
+                    <div class="col-10">Nguyen Huu Tuong</div>
+                </div>
 
-
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                <a class="dropdown-item text-center small text-gray-500" href="">Show More</a>
             </div>
         </nav>
 
@@ -466,7 +482,7 @@
     $("#inform").click(function () {
 
         var id = (new Date).getMonth() + 1;
-        alert(id)
+       
           $.ajax({
                 type: "POST",
                 url: "@Url.Action("Inform", "Event")",
@@ -474,7 +490,7 @@
                 dataType: "json",
 
               success: function (data) {
-                  alert(data)
+                
 
                 },
                 error: function () {

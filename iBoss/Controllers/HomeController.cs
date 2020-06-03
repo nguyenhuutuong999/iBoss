@@ -9,17 +9,21 @@ using iBoss.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.Data;
+using iBoss.Models.Entities.Payroll;
+using iBoss.Application.Human;
+using iBoss.Models.Entities.Human;
 
 namespace iBoss.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IManageHuman _manageHuman;
+
+        public HomeController(ILogger<HomeController> logger, IManageHuman manageHuman)
         {
             _logger = logger;
-
+            _manageHuman = manageHuman;
             this.ViewData["LayoutViewModel"] = "aaa";
 
         }
@@ -32,12 +36,25 @@ namespace iBoss.Controllers
             return View();
         }
 
+        [Route("search")]
+        [HttpGet]
+        public IActionResult Search()
+        {
+            var keyWord = Request.Query["search"];
+
+            ViewBag.key = keyWord;
+            ModelViewHuman getModel = _manageHuman.Detail(Int32.Parse(keyWord));
+            return  View(getModel);
+        }
        
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+      
     }
 }

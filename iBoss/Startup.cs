@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using iBoss.Application.Admin;
 using iBoss.Application.Human;
 using iBoss.Application.Payroll;
 using iBoss.Models.EF;
@@ -35,6 +36,7 @@ namespace iBoss
             services.AddMvc();
             services.AddTransient<IManagePayroll, ManagePayroll>();
             services.AddTransient<IManageHuman, ManageHuman>();
+            services.AddTransient<IAdmin, Admin>();
 
         }
 
@@ -62,7 +64,8 @@ namespace iBoss
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Event}/{action=Index}/{id?}");
+                    pattern: "{controller=Human}/{action=Index}/{id?}");
+                
             });
         }
     }

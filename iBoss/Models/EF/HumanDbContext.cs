@@ -14,12 +14,13 @@ namespace iBoss.Models.EF
 
         }
 
-        public DbSet<nhanvien> nhanviens { get; set; }
-        public DbSet<phongban> phongbans { get; set; }
+     
         public DbSet<ModelViewHuman> ModelViewHuman { get; set; }
 
         public DbSet<PERSONAL> PERSONALS { get; set; }
-        public DbSet<EMPLOYEMENT> EMPLOYEMENTS { get; set; }
+        public DbSet<EMPLOYMENT> EMPLOYMENTS { get; set; }
+        public DbSet<iBoss.Models.Entities.Admin.ModelViewAdmin> ModelViewAdmin { get; set; }
+      
 
     }
 }

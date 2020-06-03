@@ -25,43 +25,43 @@ namespace iBoss.Controllers
             var model = _manageHuman.Detail(id);
             return View(model);
         }
-        [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            //ViewBag.getPhongBanEdit = _manageHuman.getAllPhongBan();
+        //[HttpGet]
+        //public IActionResult Edit(int id)
+        //{
+        //    //ViewBag.getPhongBanEdit = _manageHuman.getAllPhongBan();
 
-            var model = _manageHuman.Detail(id);
-            return View(model);
-        }
-        [HttpPost]
-        public IActionResult Edit(ModelViewHuman request)
-        {
+        //    var model = _manageHuman.Detail(id);
+        //    return View(model);
+        //}
+        //[HttpPost]
+        //public IActionResult Edit(ModelViewHuman request)
+        //{
 
-            if (ModelState.IsValid)
-            {
-                _manageHuman.Update(request);
-                return RedirectToAction("Index");
-            }
+        //    if (ModelState.IsValid)
+        //    {
+        //        _manageHuman.Update(request);
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View();
-        }
-        [HttpGet]
-        public IActionResult Create()
-        {
+        //    return View();
+        //}
+        //[HttpGet]
+        //public IActionResult Create()
+        //{
 
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create(ModelViewHuman request)
-        {
+        //    return View();
+        //}
+        //[HttpPost]
+        //public IActionResult Create(ModelViewHuman request)
+        //{
 
-            if (ModelState.IsValid)
-            {
-                _manageHuman.Add(request);
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
+        //    if (ModelState.IsValid)
+        //    {
+        //        _manageHuman.Add(request);
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View();
+        //}
         // [HttpGet]
         // public IActionResult Delete(int id)
         // {

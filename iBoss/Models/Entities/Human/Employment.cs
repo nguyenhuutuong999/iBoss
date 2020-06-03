@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace iBoss.Models.Entities.Human
 {   [Table("EMPLOYMENT")]
-    public partial class EMPLOYEMENT
+    public partial class EMPLOYMENT
     {
         //public EMPLOYEMENT()
         //{
@@ -26,6 +26,6 @@ namespace iBoss.Models.Entities.Human
 
         //public virtual ICollection<EmploymentWorkingTime> EmploymentWorkingTime { get; set; }
         //public virtual ICollection<JobHistory> JobHistory { get; set; }
-        //public virtual ICollection<PERSONAL> Personal { get; set; }
+        //public PERSONAL Personal { get; set; }
     }
 }

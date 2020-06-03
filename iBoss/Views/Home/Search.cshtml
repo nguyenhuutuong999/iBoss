@@ -1,10 +1,10 @@
 ﻿@model iBoss.Models.Entities.Human.ModelViewHuman
 
 @{
-    ViewData["Title"] = "Detail";
+    ViewData["Title"] = "Search";
 }
 
-<h1>Detail</h1>
+<h1>Search</h1>
 
 <div>
     <h4>ModelViewHuman</h4>
@@ -39,6 +39,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CURRENT_ADDRESS_1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EMPLOYMENT_STATUS)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EMPLOYMENT_STATUS)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CURRENT_GENDER)

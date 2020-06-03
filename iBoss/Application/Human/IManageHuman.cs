@@ -8,13 +8,13 @@ namespace iBoss.Application.Human
 {
     public interface IManageHuman
     {
-        public IEnumerable<PERSONAL> getAll();
-        public List<phongban> getAllPhongBan();
+        public IEnumerable<ModelViewHuman> getAll();
+       
         public List<PERSONAL> getBirthDayNhanVien(int id);
-
+        public PERSONAL Search(int id);
         public void Add(ModelViewHuman request);
         public void Update(ModelViewHuman request);
-        public bool Delete(int request);
+        //public bool Delete(int request);
         
         public ModelViewHuman Detail(int id);
     }

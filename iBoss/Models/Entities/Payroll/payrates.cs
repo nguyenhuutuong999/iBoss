@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -11,8 +12,11 @@ namespace iBoss.Models.Entities.Payroll
     public class payrates
     {
         [Key]
+        [DisplayName("ID")]
         public int idPayRates { get; set; }
+        [DisplayName("")]
         public string PayRateName { get; set; }
+        [DisplayName("Value")]
         public decimal Value { get; set; }
         public decimal TaxPercentage { get; set; }
         public int PayType { get; set; }

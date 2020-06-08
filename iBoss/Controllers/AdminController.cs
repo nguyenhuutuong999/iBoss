@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using iBoss.Application.Admin;
 using iBoss.Application.Human;
 using iBoss.Models.Entities.Admin;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -19,9 +20,20 @@ namespace iBoss.Controllers
         {
             _admin = admin;
         }
+        [Route("admin")]
         public IActionResult Index()
         {
+
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username"))){
+                return RedirectToAction("Login", "User");
+            }else if(HttpContext.Session.GetString("Role").ToString() != "Admin")
+            {
+                return RedirectToAction("Error");
+            }
+            ViewBag.Role = HttpContext.Session.GetString("Role");
+            ViewBag.Name = HttpContext.Session.GetString("Name");
             ViewBag.Current = "home";
+
             return View(_admin.getAll());
         }
 

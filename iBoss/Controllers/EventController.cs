@@ -22,10 +22,16 @@ namespace iBoss.Controllers
             _managePayroll = nanagePayroll;
             _manageHuman = manageHuman;
         }
-        
+        [Route("event")]
         public IActionResult Index()
         {
-
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
+            {
+                return RedirectToAction("Login", "User");
+            }
+           
+            ViewBag.Role = HttpContext.Session.GetString("Role");
+            ViewBag.Name = HttpContext.Session.GetString("Name");
             ViewBag.Current = "event";
             return View();
         }
@@ -50,7 +56,18 @@ namespace iBoss.Controllers
         [HttpPost]
         public IActionResult Inform(int id)
         {
-            return Json(id);
+
+            if (id == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+
+                var nv = _manageHuman.getBirthDayNhanVien(id);
+
+                return Json(nv);
+            }
 
         }
 

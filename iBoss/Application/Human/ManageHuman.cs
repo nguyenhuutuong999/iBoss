@@ -17,7 +17,13 @@ namespace iBoss.Application.Human
         {
             _context = context;
         }
+        public (int, int) getGender()
+        {
+            int male = _context.PERSONALS.Count<PERSONAL>(p => p.CURRENT_GENDER == true);
+            int female = _context.PERSONALS.Count<PERSONAL>(p => p.CURRENT_GENDER == false);
 
+            return (male, female);
+        }
         public IEnumerable<ModelViewHuman> getAll()
         {
            //return  _context.PERSONALS.ToList<PERSONAL>();

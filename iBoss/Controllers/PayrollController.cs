@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace iBoss.WebApp.Controllers
+namespace iBoss.Controllers
 {
     public class PayrollController : Controller
     {
@@ -17,11 +17,28 @@ namespace iBoss.WebApp.Controllers
         {
             _managePayroll = managePayroll;
         }
-       
+        [Route("payroll")]
         public IActionResult Index()
         {
-            ViewBag.Current = "payroll";
             var model = _managePayroll.getAll();
+            ViewBag.Current = "payroll";
+
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
+            {
+                return RedirectToAction("Login", "User");
+            }
+            else if (HttpContext.Session.GetString("Role").ToString() == "Admin")
+            {
+                return View(model);
+            }
+            else if (HttpContext.Session.GetString("Role").ToString() != "Payroll")
+            {
+                return RedirectToAction("Error");
+            }
+            ViewBag.Role = HttpContext.Session.GetString("Role");
+            ViewBag.Name = HttpContext.Session.GetString("Name");
+            
+           
             return View(model);
         }
 

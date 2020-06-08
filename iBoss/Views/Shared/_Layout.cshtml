@@ -11,6 +11,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -27,6 +28,7 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
     <style>
+
         body {
             max-width: 100%;
             height: 100%;
@@ -34,7 +36,7 @@
             padding: 0px;
             top: 0;
             background: rgba(233, 227, 227, 0.45);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-family: 'Roboto', sans-serif;
         }
 
         nav {
@@ -63,7 +65,7 @@
         }
 
             .side-bar a {
-                color: black;
+                color: rgb(58, 52, 52);
                 text-decoration: none;
                 list-style: none;
             }
@@ -79,6 +81,7 @@
             border-radius: 0 10px 10px 0;
             border-bottom: 1px rgb(14, 12, 12);
             z-index: 1;
+            color: rgb(131, 125, 125);
         }
 
             .button-link:hover {
@@ -102,7 +105,7 @@
         .list {
             background: white;
             height: 80vh;
-            margin: 100px 10px;
+            margin: 90px 10px;
         }
 
         .chart {
@@ -110,7 +113,7 @@
             padding: 0;
             max-width: 35%;
             height: 60vh;
-            margin: 100px 0 100px 10px;
+            margin: 90px 0 10px 10px;
         }
 
         #genderChart {
@@ -143,6 +146,7 @@
                 position: absolute;
                 background: rgba(233, 227, 227, 0.45);
             }
+
             .search-container input[type=number] {
                 padding: 10px;
                 margin-top: 8px;
@@ -270,14 +274,49 @@
                 font-size: 20px;
             }
 
+       
+
         .box-block {
+            box-shadow: 500px 50px 50px rgba(4, 9, 20, 0.03);
             left: 81%;
             top: 9%;
             width: 290px;
-            height: 500px;
             background-color: white;
             position: fixed;
-            display: block;
+            display: none;
+            padding: 10px;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .list-birthday a {
+            display: flex;
+            text-decoration: none;
+            color: black;
+        }
+
+            .list-birthday a:hover {
+                background: #F5F2F2;
+            }
+
+        .text {
+            font-weight: 500;
+        }
+
+            .text p {
+                font-weight: normal;
+                font-size: 13px;
+            }
+
+        .list-birthday {
+            padding: 0px;
+        }
+
+        .icon-birthday {
+            margin: 5px;
+            color: rgb(155, 147, 147);
         }
     </style>
     <!-- containner -->
@@ -295,22 +334,22 @@
                 <input type="checkbox">
                 <span class="slider round"></span>
             </label>
-            <a href="#" class="item-nav exit-button">
+            <a   onclick="confirmLogout()" class="item-nav exit-button">
                 <i class="fas fa-sign-out-alt fa-3x" style="color:rgb(176, 184, 190)"></i>
             </a>
             <a href="#" class=" item-nav notification" id="inform">
                 <i class="fas fa-bell fa-3x" style="color:rgb(176, 184, 190)"></i>
             </a>
-            <div class="box-block">
-                <h6 >
-                   Notification
-                </h6>
-                <div class="row">
-                    <div class="col-2" style="color:#6f5f5f"><i class="fas fa-birthday-cake fa-2x"></i></div>
-                    <div class="col-10">Nguyen Huu Tuong</div>
-                </div>
 
-                <a class="dropdown-item text-center small text-gray-500" href="">Show More</a>
+            <div class="box-block">
+                <h6>
+                    Notifications
+                </h6>
+                <hr style="margin: 2px 0 10px 0" />
+                <ul class="list-birthday" id="inform-birthday">
+                    
+                </ul>
+                <a class="dropdown-item text-center small text-gray-500" href="event">Show More</a>
             </div>
         </nav>
 
@@ -319,155 +358,38 @@
 
             <!-- side bar -->
             <div class="col-md-2 side-bar ">
+                @if (ViewBag.Role == "Admin" || ViewBag.Role == null)
+                {
+                    <a href="@Url.Action("Index","Admin")" class="button-link @(ViewBag.Current == "home" ? "active" : "") " id="payroll">
+                        <i class="fas fa-home fa-2x"></i>
+                        <h3>Admin</h3>
+                    </a>
+                }
+                @if (ViewBag.Role == "Admin" || ViewBag.Role == "Payroll" || ViewBag.Role == null)
+                {
+                    <a href="@Url.Action("Index","Payroll")" class="button-link @(ViewBag.Current == "payroll" ? "active" : "") " id="payroll">
+                        <i class="fas fa-money-check fa-2x"></i>
+                        <h3>Payroll</h3>
+                    </a>
+                }
+                @if (ViewBag.Role == "Admin" || ViewBag.Role == "Human" || ViewBag.Role == null) {
+                    <a href="@Url.Action("Index","Human")" class="button-link @(ViewBag.Current == "human" ? "active" : "") " id="human">
+                        <i class="fas fa-users fa-2x"></i>
+                        <h3>Human</h3>
+                    </a>
+                }
 
-                <a href="home" class="button-link @(ViewBag.Current == "home" ? "active" : "") " id="payroll">
-                    <i class="fas fa-home fa-2x"></i>
-                    <h3>Home</h3>
-                </a>
-
-                <a href="payroll" class="button-link @(ViewBag.Current == "payroll" ? "active" : "") " id="payroll">
-                    <i class="fas fa-money-check fa-2x"></i>
-                    <h3>Payroll</h3>
-                </a>
-
-                <a href="human" class="button-link @(ViewBag.Current == "human" ? "active" : "") " id="human">
-                    <i class="fas fa-users fa-2x"></i>
-                    <h3>Human</h3>
-                </a>
-
-                <a href="event" class="button-link  @(ViewBag.Current == "event" ? "active" : "") " id="event">
+                <a href="@Url.Action("Index","Event")" class="button-link  @(ViewBag.Current == "event" ? "active" : "") " id="event">
                     <i class="far fa-calendar-check fa-3x"></i>
                     <h3>Event</h3>
                 </a>
 
-
-
-
-
             </div>
             <!-- main content -->
-            <div class="col-md-10 main-content  row">
-
-                <div class="list col-sm-9">
+            <div class="col-md-10 main-content row" style="padding-right:0">
+              
                     @RenderBody()
-                    @* </div>
-                        <div class="chart col-md-3">
-                            <div id="genderChart"></div>
-                            <div id="numberChart"></div>
-
-                            <script>
-                                let myConfig = {
-
-                                    type: 'pie',
-                                    scale: {
-                                        'size-factor': 0.9
-                                    },
-                                    title: {
-                                        text: "Gender Chart"
-                                    },
-                                    legend: {
-                                        layout: "2x1", //row x column
-                                        x: "75%",
-                                        y: "10%",
-                                    },
-
-                                    plot: {
-                                        'value-box': {
-                                            'font-family': "Georgia",
-                                            'font-size': 14,
-                                            'font-weight': "normal",
-                                            'offset-r': "20%",
-
-
-                                        },
-                                        animation: {
-                                            effect: "2",
-                                            method: "3",
-                                            sequence: "ANIMATION_BY_PLOT",
-                                            speed: "ANIMATION_FAST"
-                                        }
-                                    },
-                                    series: [
-                                        {
-                                            values: [59],
-                                            'background-color': "#8c8c8c",
-                                            'text': "Female"
-                                        },
-                                        {
-                                            values: [30],
-                                            'background-color': "#575656",
-                                            'text': "Male"
-                                        },
-
-                                    ]
-
-                                };
-                                let myConfig1 = {
-
-                                    type: 'pie',
-                                    scale: {
-                                        'size-factor': 0.9
-                                    },
-                                    title: {
-                                        text: "Gender Chart"
-                                    },
-                                    legend: {
-                                        layout: "2x1", //row x column
-                                        x: "75%",
-                                        y: "10%",
-                                    },
-
-                                    plot: {
-                                        'value-box': {
-                                            'font-family': "Georgia",
-                                            'font-size': 14,
-                                            'font-weight': "normal",
-                                            'offset-r': "20%",
-
-
-                                        },
-                                        animation: {
-                                            effect: "2",
-                                            method: "3",
-                                            sequence: "ANIMATION_BY_PLOT",
-                                            speed: "ANIMATION_FAST"
-                                        }
-                                    },
-                                    series: [
-                                        {
-                                            values: [30],
-                                            'background-color': "#8c8c8c",
-                                            'text': "Female"
-                                        },
-                                        {
-                                            values: [59],
-                                            'background-color': "#575656",
-                                            'text': "Male"
-                                        },
-
-                                    ]
-
-
-                                }
-
-                                // Render Method[3]
-                                zingchart.render(
-                                    {
-                                        id: 'genderChart',
-                                        data: myConfig,
-                                        height: "100%",
-                                    },
-                                );
-                                zingchart.render(
-                                    {
-                                        id: 'numberChart',
-                                        data: myConfig1,
-                                        height: "100%",
-                                    },
-                                );
-                            </script>
-                        </div>*@
-                </div>
+                
             </div>
 
         </div>
@@ -476,13 +398,19 @@
 
 </html>
 <script>
-
+    function confirmLogout() {
+        var reallyLogout = confirm("Do you really want to log out?");
+        if (reallyLogout) {
+            location.href = "User/Logout";
+        }
+    }
+   
 </script>
 <script>
-    $("#inform").click(function () {
+
 
         var id = (new Date).getMonth() + 1;
-       
+
           $.ajax({
                 type: "POST",
                 url: "@Url.Action("Inform", "Event")",
@@ -490,7 +418,26 @@
                 dataType: "json",
 
               success: function (data) {
-                
+                 // alert(id);
+                  var rows = '';
+                  $.each(data, function (i, item) {
+
+                      //format date
+
+
+                      rows +=
+                          '<li>' +
+                          '                        <a href="">' +
+                          '                            <div class="col-2 icon-birthday"><i class="fas fa-birthday-cake fa-2x"></i></div>' +
+                      '                            <div class="col-10 text"> ' + item.currenT_FIRST_NAME+'<p> has birthday today</p></div>' +
+                          '' +
+                          '                        </a>' +
+                          '                    </li>';
+                  });
+
+
+                  $("#inform-birthday").append(rows);
+
 
                 },
                 error: function () {
@@ -501,9 +448,11 @@
 
 
 
+    $("#inform").click(function () {
         $(".box-block").attr("style", "display:block");
-
     });
+
+
 
     $(".main-page").click(function (e) {
         $(".box-block").attr("style", "display:none");

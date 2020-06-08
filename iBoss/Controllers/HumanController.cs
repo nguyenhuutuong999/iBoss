@@ -13,10 +13,32 @@ namespace iBoss.Controllers
         {
             _manageHuman = manageHuman;
         }
+        [Route("human")]
         public IActionResult Index()
         {
+            var model = _manageHuman.getAll();
             ViewBag.Current = "human";
-            return View(_manageHuman.getAll());
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
+            {
+                return RedirectToAction("Login", "User");
+            }
+            else if (HttpContext.Session.GetString("Role").ToString() == "Admin")
+            {
+                return View(model);
+            }
+            else if (HttpContext.Session.GetString("Role").ToString() != "Human")
+            {
+                return RedirectToAction("Error");
+            }
+            var value = _manageHuman.getGender();
+
+            ViewBag.Male = value.Item1;
+            ViewBag.Female = value.Item2;
+
+            ViewBag.Role = HttpContext.Session.GetString("Role");
+            ViewBag.Name = HttpContext.Session.GetString("Name");
+            
+            return View(model);
             
         }
 
@@ -25,6 +47,7 @@ namespace iBoss.Controllers
             var model = _manageHuman.Detail(id);
             return View(model);
         }
+
         //[HttpGet]
         //public IActionResult Edit(int id)
         //{

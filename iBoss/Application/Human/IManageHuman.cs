@@ -15,7 +15,7 @@ namespace iBoss.Application.Human
         public void Add(ModelViewHuman request);
         public void Update(ModelViewHuman request);
         //public bool Delete(int request);
-        
+        public (int, int) getGender();
         public ModelViewHuman Detail(int id);
     }
 }

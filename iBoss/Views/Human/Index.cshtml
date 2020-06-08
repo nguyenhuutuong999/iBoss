@@ -3,80 +3,198 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="list col-sm-9">
+    <h1>Index</h1>
 
-<h1>Index</h1>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CURRENT_FIRST_NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CURRENT_LAST_NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BIRTH_DATE)
+                </th>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CURRENT_FIRST_NAME)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CURRENT_LAST_NAME)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BIRTH_DATE)
-            </th>
-           
-            <th>
-                @Html.DisplayNameFor(model => model.CURRENT_ADDRESS_1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CURRENT_GENDER)
-            </th>
-           
-            <th>
-                @Html.DisplayNameFor(model => model.CURRENT_PHONE_NUMBER)
-            </th>
-           
-           
-          
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CURRENT_FIRST_NAME)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CURRENT_LAST_NAME)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BIRTH_DATE)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.CURRENT_ADDRESS_1)
-            </td>
-            <td>
-                @if (item.CURRENT_GENDER == true)
-                {
-                    <label>Male</label>
+                <th>
+                    @Html.DisplayNameFor(model => model.CURRENT_ADDRESS_1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CURRENT_GENDER)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.CURRENT_PHONE_NUMBER)
+                </th>
+
+
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CURRENT_FIRST_NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CURRENT_LAST_NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BIRTH_DATE)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CURRENT_ADDRESS_1)
+                    </td>
+                    <td>
+                        @if (item.CURRENT_GENDER == true)
+                        {
+                            <label>Male</label>
+                        }
+                        else if (item.CURRENT_GENDER == false)
+                        {
+                            <label>Female</label>
+                        }
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CURRENT_PHONE_NUMBER)
+                    </td>
+
+
+
+                    <td>
+                        @*<a asp-action="Edit" asp-route-id="@item.EMPLOYEE_ID">Edit</a> |*@
+                        <a asp-action="Detail" asp-route-id="@item.EMPLOYEE_ID">Details</a>
+                        @*<a asp-action="Delete" asp-route-id="@item.EMPLOYEE_ID">Delete</a>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="chart col-md-3">
+    <div id="genderChart"></div>
+    <div id="numberChart"></div>
+
+    <script>
+        let myConfig = {
+
+            type: 'pie',
+            scale: {
+                'size-factor': 0.9
+            },
+            title: {
+                text: "Gender Chart"
+            },
+            legend: {
+                layout: "2x1", //row x column
+                x: "75%",
+                y: "10%",
+            },
+
+            plot: {
+                'value-box': {
+                    'font-family': "Georgia",
+                    'font-size': 14,
+                    'font-weight': "normal",
+                    'offset-r': "10%",
+
+
+                },
+                animation: {
+                    effect: "2",
+                    method: "3",
+                    sequence: "ANIMATION_BY_PLOT",
+                    speed: "ANIMATION_FAST"
                 }
-                else if (item.CURRENT_GENDER == false)
+            },
+            series: [
                 {
-                    <label>Female</label>
-                }
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.CURRENT_PHONE_NUMBER)
-            </td>
-           
-          
+                    values: [@ViewBag.Female],
+                    'background-color': "#8c8c8c",
+                    'text': "Female"
+                },
+                {
+                    values: [@ViewBag.Male],
+                    'background-color': "#575656",
+                    'text': "Male"
+                },
 
-            <td>
-                @*<a asp-action="Edit" asp-route-id="@item.EMPLOYEE_ID">Edit</a> |*@
-                <a asp-action="Detail" asp-route-id="@item.EMPLOYEE_ID">Details</a>
-                @*<a asp-action="Delete" asp-route-id="@item.EMPLOYEE_ID">Delete</a>*@
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            ]
+
+        };
+        let myConfig1 = {
+
+            type: 'pie',
+            scale: {
+                'size-factor': 0.9
+            },
+            title: {
+                text: "Gender Chart"
+            },
+            legend: {
+                layout: "2x1", //row x column
+                x: "75%",
+                y: "10%",
+            },
+
+            plot: {
+                'value-box': {
+                    'font-family': "Georgia",
+                    'font-size': 14,
+                    'font-weight': "normal",
+                    'offset-r': "20%",
+
+
+                },
+                animation: {
+                    effect: "2",
+                    method: "3",
+                    sequence: "ANIMATION_BY_PLOT",
+                    speed: "ANIMATION_FAST"
+                }
+            },
+            series: [
+                {
+                    values: [30],
+                    'background-color': "#8c8c8c",
+                    'text': "Female"
+                },
+                {
+                    values: [59],
+                    'background-color': "#575656",
+                    'text': "Male"
+                },
+
+            ]
+
+
+        }
+
+        // Render Method[3]
+        zingchart.render(
+            {
+                id: 'genderChart',
+                data: myConfig,
+                height: "100%",
+            },
+        );
+        zingchart.render(
+            {
+                id: 'numberChart',
+                data: myConfig1,
+                height: "100%",
+            },
+        );
+    </script>
+</div>

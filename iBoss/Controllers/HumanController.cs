@@ -9,6 +9,7 @@ namespace iBoss.Controllers
     public class HumanController : Controller
     {
         private readonly IManageHuman _manageHuman;
+        
         public HumanController(IManageHuman manageHuman)
         {
             _manageHuman = manageHuman;
@@ -18,6 +19,15 @@ namespace iBoss.Controllers
         {
             var model = _manageHuman.getAll();
             ViewBag.Current = "human";
+
+            var value = _manageHuman.getGender();
+
+            ViewBag.Male = value.Item1;
+            ViewBag.Female = value.Item2;
+
+            ViewBag.Role = HttpContext.Session.GetString("Role");
+            ViewBag.Name = HttpContext.Session.GetString("Name");
+
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
             {
                 return RedirectToAction("Login", "User");
@@ -30,13 +40,7 @@ namespace iBoss.Controllers
             {
                 return RedirectToAction("Error");
             }
-            var value = _manageHuman.getGender();
-
-            ViewBag.Male = value.Item1;
-            ViewBag.Female = value.Item2;
-
-            ViewBag.Role = HttpContext.Session.GetString("Role");
-            ViewBag.Name = HttpContext.Session.GetString("Name");
+           
             
             return View(model);
             

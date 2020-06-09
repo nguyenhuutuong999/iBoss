@@ -23,6 +23,9 @@ namespace iBoss.Controllers
             var model = _managePayroll.getAll();
             ViewBag.Current = "payroll";
 
+            ViewBag.Role = HttpContext.Session.GetString("Role");
+            ViewBag.Name = HttpContext.Session.GetString("Name");
+
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
             {
                 return RedirectToAction("Login", "User");
@@ -35,10 +38,7 @@ namespace iBoss.Controllers
             {
                 return RedirectToAction("Error");
             }
-            ViewBag.Role = HttpContext.Session.GetString("Role");
-            ViewBag.Name = HttpContext.Session.GetString("Name");
-            
-           
+
             return View(model);
         }
 

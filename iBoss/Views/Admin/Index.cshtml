@@ -77,3 +77,67 @@
         </tbody>
     </table>
     </div>
+<div class="chart col-md-3">
+    <div id="genderChart"></div>
+    <div id="numberChart"></div>
+
+    <script>
+        let myConfig = {
+
+            type: 'pie',
+            scale: {
+                'size-factor': 0.9
+            },
+            title: {
+                text: "Gender Chart"
+            },
+            legend: {
+                layout: "2x1", //row x column
+                x: "75%",
+                y: "10%",
+            },
+
+            plot: {
+                'value-box': {
+                    'font-family': "Georgia",
+                    'font-size': 14,
+                    'font-weight': "normal",
+                    'offset-r': "10%",
+
+
+                },
+                animation: {
+                    effect: "2",
+                    method: "3",
+                    sequence: "ANIMATION_BY_PLOT",
+                    speed: "ANIMATION_FAST"
+                }
+            },
+            series: [
+                {
+                    values: [@ViewBag.Female],
+                    'background-color': "#8c8c8c",
+                    'text': "Female"
+                },
+                {
+                    values: [@ViewBag.Male],
+                    'background-color': "#575656",
+                    'text': "Male"
+                },
+
+            ]
+
+        };
+
+
+        // Render Method[3]
+        zingchart.render(
+            {
+                id: 'genderChart',
+                data: myConfig,
+                height: "100%",
+            },
+        );
+
+    </script>
+</div>

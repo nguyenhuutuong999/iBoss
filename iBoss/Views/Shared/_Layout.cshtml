@@ -317,6 +317,7 @@
         .icon-birthday {
             margin: 5px;
             color: rgb(155, 147, 147);
+            font-weight: 300;
         }
     </style>
     <!-- containner -->
@@ -386,7 +387,7 @@
 
             </div>
             <!-- main content -->
-            <div class="col-md-10 main-content row" style="padding-right:0">
+            <div class=" fa- col-md-10 main-content row" style="padding-right:0">
               
                     @RenderBody()
                 
@@ -407,51 +408,86 @@
    
 </script>
 <script>
+    var month = (new Date).getMonth() + 1;
+    var date = (new Date).getDate();
+    var year = (new Date).getFullYear();
+    //alert(date);
+    $.ajax({
+        type: "POST",
+        url: "@Url.Action("InformBirthday", "Event")",
+        data: { month: month, date: date },
+        dataType: "json",
+
+        success: function (data) {
+            // alert(id);
+            var rows = '';
+            $.each(data, function (i, item) {
+
+                //format date
 
 
-        var id = (new Date).getMonth() + 1;
 
-          $.ajax({
-                type: "POST",
-                url: "@Url.Action("Inform", "Event")",
-                data: { id: id },
-                dataType: "json",
-
-              success: function (data) {
-                 // alert(id);
-                  var rows = '';
-                  $.each(data, function (i, item) {
-
-                      //format date
+                rows +=
+                    '<li>' +
+                    '                        <a href="">' +
+                    '                            <div class="col-2 icon-birthday"><i class="fas fa-birthday-cake fa-2x"></i></div>' +
+                    '                            <div class="col-10 text"> ' + item.currenT_FIRST_NAME + '<p> has birthday today. Wish '+(item.currenT_FIRST_NAME ? "him": "her")+' the best !!!</p></div>' +
+                    '' +
+                    '                        </a>' +
+                    '                    </li>';
+            });
 
 
-                      rows +=
-                          '<li>' +
-                          '                        <a href="">' +
-                          '                            <div class="col-2 icon-birthday"><i class="fas fa-birthday-cake fa-2x"></i></div>' +
-                      '                            <div class="col-10 text"> ' + item.currenT_FIRST_NAME+'<p> has birthday today</p></div>' +
-                          '' +
-                          '                        </a>' +
-                          '                    </li>';
-                  });
+            $("#inform-birthday").append(rows);
 
 
-                  $("#inform-birthday").append(rows);
+        },
+        error: function () {
+            alert("Error. Can't sent request !!!");
+
+        },
+    });
+
+    $.ajax({
+        type: "POST",
+        url: "@Url.Action("InformHiringDay", "Event")",
+        data: { month: month, date: date },
+        dataType: "json",
+
+        success: function (data) {
+            //alert(JSON.stringify(data));
+            var rows = '';
+            $.each(data, function (i, item) {
+                
+                //format date
+                const dateTime = item.hirE_DATE_FOR_WORKING;
+                const parts = dateTime.split(/[- T :]/);
+                const getYear = parseInt(year) - parseInt(parts[0]);
+                rows +=
+                    '<li>' +
+                    '                        <a href="">' +
+                '                            <div class="col-2 icon-birthday"><i class="fas fa-briefcase fa-2x"></i></div>' +
+                '                            <div class="col-10 text">' + item.currenT_FIRST_NAME + '<p>The Anniversary of the ' + getYear + ' years work here.</p></div>' +
+                    '' +
+                    '                        </a>' +
+                    '                    </li>';
+            });
 
 
-                },
-                error: function () {
-                    alert("Error. Can't sent request !!!");
+            $("#inform-birthday").append(rows);
 
-                },
-            })
 
+        },
+        error: function () {
+            alert("Error. Can't sent request !!!");
+
+        },
+    });
 
 
     $("#inform").click(function () {
         $(".box-block").attr("style", "display:block");
     });
-
 
 
     $(".main-page").click(function (e) {

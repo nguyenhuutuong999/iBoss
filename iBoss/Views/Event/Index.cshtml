@@ -7,6 +7,9 @@
     .tab-content {
         margin: 30px 40px;
     }
+    .fas{
+        color: #676464;
+    }
 </style>
 
 <div class="list col-sm-9">
@@ -21,7 +24,7 @@
 
             </li>
             <li class="tab tab-des">
-                <a href="javascript:;" class="">ABSENT</a>
+                <a href="javascript:;" class="">ANNIVERSARY</a>
 
             </li>
             <li class="tab tab-acc">
@@ -33,7 +36,7 @@
         <article id="birthday" class="tab-content content-ques">
             <form method="POST" action="Birthday">
                 <label class="control-label">Month</label>
-                <select style="border:none" name="agent_id" id="selectMonth">
+                <select style="border:none" name="agent_id" id="selectMonthBirthDay">
 
                     <option value=1>January</option>
                     <option value=2>February</option>
@@ -53,8 +56,26 @@
 
         </article>
         <div class="clear"></div>
-        <article class="tab-content content-des" style="display: none">
-            <h1 class="title">DO YOU HAVE A NPL ACCOUNT</h1>
+        <article id="hiringDay" class="tab-content content-des" style="display: none">
+            <form method="POST" action="HiringDay">
+                <label class="control-label">Month</label>
+                <select style="border:none" name="agent_id" id="selectMonthHiringDay">
+
+                    <option value=1>January</option>
+                    <option value=2>February</option>
+                    <option value=3>March</option>
+                    <option value=4>April</option>
+                    <option value=5>May</option>
+                    <option value=6>June</option>
+                    <option value=7>July</option>
+                    <option value=8>August</option>
+                    <option value=9>September</option>
+                    <option value=10>October</option>
+                    <option value=11>November</option>
+                    <option value=12>December</option>
+                </select>
+
+            </form>
 
         </article>
         <article class="tab-content content-acc" style="display:none">
@@ -72,123 +93,206 @@
     //        alert(month);
     //    })
     //});
-    $(function () {
-        $("#selectMonth").change(function () {
+        $(function () {
+            $("#selectMonthBirthDay").change(function () {
 
-            var id = $("#selectMonth").val();
+                var id = $("#selectMonthBirthDay").val();
 
-            $.ajax({
-                type: "POST",
-                url: "@Url.Action("Birthday", "Event")",
-                data: { id: id },
-                dataType: "json",
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Birthday", "Event")",
+                    data: { id: id },
+                    dataType: "json",
 
-                success: function (data) {
+                    success: function (data) {
 
-                    $("#table-birthday").remove();
-                    var rows = '';
+                        $("#table-birthday").remove();
+                        var rows = '';
 
-                    //duyệt vòng lặp lấy thông tin ngày sinh
-                    $.each(data, function (i, item) {
+                        //duyệt vòng lặp lấy thông tin ngày sinh
+                        $.each(data, function (i, item) {
 
-                        //format date
-                        const dateTime = item.birtH_DATE;
-                        const parts = dateTime.split(/[- T :]/);
-                        var month = 0;
+                            //format date
+                            const dateTime = item.birtH_DATE;
+                            const parts = dateTime.split(/[- T :]/);
+                            var month = 0;
 
-                        switch (parts[1]) {
-                            case '01':
-                                month = 'January';
-                                break;
-                            case '02':
-                                month = 'Febuary';
-                                break;
-                            case '03':
-                                month = 'March';
-                                break;
-                            case '04':
-                                month = 'April';
-                                break;
-                            case '05':
-                                month = 'May';
-                                break;
-                            case '06':
-                                month = 'June';
-                                break;
+                            switch (parts[1]) {
+                                case '01':
+                                    month = 'January';
+                                    break;
+                                case '02':
+                                    month = 'Febuary';
+                                    break;
+                                case '03':
+                                    month = 'March';
+                                    break;
+                                case '04':
+                                    month = 'April';
+                                    break;
+                                case '05':
+                                    month = 'May';
+                                    break;
+                                case '06':
+                                    month = 'June';
+                                    break;
 
-                            case '07':
-                                month = 'July';
-                                break;
-                            case '08':
-                                month = 'August';
-                                break;
-                            case '09':
-                                month = 'September';
-                                break;
-                            case '10':
-                                month = 'October';
-                                break;
-                            case '11':
-                                month = 'November';
-                                break;
-                            case '12':
-                                month = 'December';
-                                break;
+                                case '07':
+                                    month = 'July';
+                                    break;
+                                case '08':
+                                    month = 'August';
+                                    break;
+                                case '09':
+                                    month = 'September';
+                                    break;
+                                case '10':
+                                    month = 'October';
+                                    break;
+                                case '11':
+                                    month = 'November';
+                                    break;
+                                case '12':
+                                    month = 'December';
+                                    break;
 
-                        }
+                            }
 
-                        const wanted = `${month}, ${parts[2]} ${parts[0]}`;
+                            const wanted = `${month}, ${parts[2]} ${parts[0]}`;
 
-                        rows +=
-                            '                        <tr>' +
+                            rows +=
+                                '                        <tr>' +
 
-                        '                            <td><i class="fas fa-birthday-cake fa-2x"></i></td>' +
-                            '                            <td>' + item.employeE_ID +
-                        '                            </td>' +
-                        '                            <td>' + item.currenT_FIRST_NAME +
-                        '                            </td>' +
-                        '                            <td>' + item.currenT_LAST_NAME +
-                        '                            </td>' +
+                                '                            <td><i class="fas fa-birthday-cake fa-2x"></i></td>' +
+                                '                            <td>' + item.employeE_ID +
+                                '                            </td>' +
+                                '                            <td>' + item.currenT_FIRST_NAME +
+                                '                            </td>' +
+                                '                            <td>' + item.currenT_LAST_NAME +
+                                '                            </td>' +
 
-                        '                            <td>' + wanted +
-                            '                            </td>' +
-                            '                           ' +
-                            '                        </tr>';
-                    });
+                                '                            <td>' + wanted +
+                                '                            </td>' +
+                                '                            <td>' + (item.currenT_GENDER ? "Male" : "Female") +
+                                '                            </td>' +
+                                '                            <td>' + item.currenT_PHONE_NUMBER +
+                                '                            </td>' +
 
-
-
-                    var myvar =
-                        '<table id = "table-birthday" class="table">' +
-                        '                <thead>'+
-                        '                    <tr>' +
-                        '                        <th></th>' +
-                        '                        <th>ID</th>' +
-                        '                        <th>Family Name</th>'+
-                        '                        <th>First Name</th>' +
-
-                        '                        <th>DateOfBirth</th>'+
-                        '                    </tr>'+
-                        '                </thead>'+
-                        '                <tbody>' +
-                        rows
-                        +
-
-                        '                </tbody>'+
-                        '            </table>';
+                                '                           ' +
+                                '                        </tr>';
+                        });
 
 
 
-                    $("#birthday").append(myvar);
+                        var myvar =
+                            '<table id = "table-birthday" class="table">' +
+                            '                <thead>' +
+                            '                    <tr>' +
+                            '                        <th></th>' +
+                            '                        <th>ID</th>' +
+                            '                        <th>Family Name</th>' +
+                            '                        <th>First Name</th>' +
+                            '                        <th>Date Of Birth</th>' +
+                            '                        <th>Gender</th>' +
+                            '                        <th>Phone</th>' +
+                            '                    </tr>' +
+                            '                </thead>' +
+                            '                <tbody>' +
+                            rows
+                            +
 
-                },
-                error: function () {
-                    alert("Error. Can't sent request !!!");
+                            '                </tbody>' +
+                            '            </table>';
 
-                },
-            })
-        })
-    })
 
+
+                        $("#birthday").append(myvar);
+
+                    },
+                    error: function () {
+                        alert("Error. Can't sent request !!!");
+
+                    },
+                });
+            });
+        });
+
+
+          $(function () {
+              $("#selectMonthHiringDay").change(function () {
+
+                  var id = $("#selectMonthHiringDay").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("HiringDay", "Event")",
+                    data: { id: id },
+                    dataType: "json",
+
+                    success: function (data) {
+
+                        $("#table-hiringDay").remove();
+                        var rows = '';
+
+                        //duyệt vòng lặp lấy thông tin ngày sinh
+                        $.each(data, function (i, item) {
+
+                            //format date
+                            const dateTime = item.hirE_DATE_FOR_WORKING;
+                            const parts = dateTime.split(/[- T :]/);
+                            const getYear = parseInt(year) - parseInt(parts[0]);
+
+                            rows +=
+                                '                        <tr>' +
+
+                                '                            <td><i class="fas fa-briefcase fa-2x"></i></td>' +
+                                '                            <td>' + item.employeE_ID +
+                                '                            </td>' +
+                                '                            <td>' + item.currenT_FIRST_NAME +
+                                '                            </td>' +
+                                '                            <td>' + item.currenT_LAST_NAME +
+                                '                            </td>' +
+                                '                            <td>' + getYear +
+                                '                            </td>' +
+                                '                            <td>' + (item.currenT_GENDER ? "Male" : "Female") +
+                                '                            </td>' +
+                                '                            <td>' + item.currenT_PHONE_NUMBER +
+                                '                            </td>' +
+
+                                '                           ' +
+                                '                        </tr>';
+                        });
+
+                        var myvar =
+                            '<table id = "table-hiringDay" class="table">' +
+                            '                <thead>' +
+                            '                    <tr>' +
+                            '                        <th></th>' +
+                            '                        <th>ID</th>' +
+                            '                        <th>Family Name</th>' +
+                            '                        <th>First Name</th>' +
+                            '                        <th>Anniversary</th>' +
+                            '                        <th>Gender</th>' +
+                            '                        <th>Phone</th>' +
+                            '                    </tr>' +
+                            '                </thead>' +
+                            '                <tbody>' +
+                            rows
+                            +
+
+                            '                </tbody>' +
+                            '            </table>';
+
+
+
+                        $("#hiringDay").append(myvar);
+
+                    },
+                    error: function () {
+                        alert("Error. Can't sent request !!!");
+                    },
+                });
+            });
+        });
 
     </script>

@@ -37,12 +37,13 @@ namespace iBoss.Controllers
                 ViewBag.Error = "Wrong Username or Password";
                 return View();
             }
+
             //save session
             HttpContext.Session.SetString("Username", user.USERNAME);
             HttpContext.Session.SetString("Role", user.ROLE);
             HttpContext.Session.SetString("Name", user.NAME);
 
-            //get time Login in
+            //get last time Login in
             Response.Cookies.Append("LastLoggedInTime", DateTime.Now.ToString());
 
             if (HttpContext.Session.GetString("Role") == "Admin"){

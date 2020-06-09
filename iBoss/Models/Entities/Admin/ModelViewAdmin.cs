@@ -38,7 +38,7 @@ namespace iBoss.Models.Entities.Admin
 
         //emploment
         [DisplayName("Employment Status")]
-        public string EMPLOYMENT_STATUS { get; set; }
+        public string? EMPLOYMENT_STATUS { get; set; }
         [DisplayName("Hire Date For Working")]
         [DataType(DataType.Date)]
         public DateTime? HIRE_DATE_FOR_WORKING { get; set; }

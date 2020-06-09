@@ -40,7 +40,7 @@
         <span asp-validation-for="TENPHONGBAN" class="text-danger"></span>*@
 
                 <select class="form-control" asp-for="PayRatesidPayRates"
-                        asp-items="@(new SelectList(ViewBag.getPayRate,"idPayRates","idPayRates"))">
+                        asp-items="@(new SelectList(ViewBag.getPayRate,"idPayRates","PayRateName"))">
                     <option>Please select one...</option>
                 </select>
             </div>

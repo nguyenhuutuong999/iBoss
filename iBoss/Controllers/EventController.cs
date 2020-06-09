@@ -44,28 +44,54 @@ namespace iBoss.Controllers
             }
             else
             {
-               
-                var nv = _manageHuman.getBirthDayNhanVien(id);
-               
+                var nv = _manageHuman.getBirthDay(id);
                 return Json(nv);
             }
           
         }
-        
-       
-        [HttpPost]
-        public IActionResult Inform(int id)
-        {
 
+        [HttpPost]
+        public IActionResult HiringDay(int id)
+        {
             if (id == 0)
             {
                 return RedirectToAction("Index");
             }
             else
             {
+                var nv = _manageHuman.getHiringDay(id);
+                return Json(nv);
+            }
 
-                var nv = _manageHuman.getBirthDayNhanVien(id);
+        }
 
+
+        [HttpPost]
+        public IActionResult InformBirthday(int month, int date)
+        {
+            if (month == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                var nv = _manageHuman.getBirthDayInform(month,date);
+                return Json(nv);
+            }
+
+        }
+
+
+        [HttpPost]
+        public IActionResult InformHiringDay(int month, int date)
+        {
+            if (month == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                var nv = _manageHuman.getHiringDayInform(month, date);  
                 return Json(nv);
             }
 

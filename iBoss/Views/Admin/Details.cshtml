@@ -43,8 +43,15 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CURRENT_GENDER)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CURRENT_GENDER)
+        <dd class="col-sm-10">
+            @if (Model.CURRENT_GENDER)
+            {
+                <label>Male</label>
+            }
+            else
+            {
+                <label>Female</label>
+            }
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CURRENT_PHONE_NUMBER)

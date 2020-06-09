@@ -14,15 +14,19 @@ namespace iBoss.Controllers
     public class AdminController : Controller
     {
         private readonly IAdmin _admin;
-        
+        private readonly IManageHuman _manageHuman;
 
-        public AdminController(IAdmin admin)
+        public AdminController(IAdmin admin, IManageHuman manageHuman)
         {
             _admin = admin;
+            _manageHuman = manageHuman;
         }
         [Route("admin")]
         public IActionResult Index()
         {
+            var value = _manageHuman.getGender();
+            ViewBag.Male = value.Item1;
+            ViewBag.Female = value.Item2;
 
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username"))){
                 return RedirectToAction("Login", "User");

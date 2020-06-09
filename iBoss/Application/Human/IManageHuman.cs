@@ -10,7 +10,10 @@ namespace iBoss.Application.Human
     {
         public IEnumerable<ModelViewHuman> getAll();
        
-        public List<PERSONAL> getBirthDayNhanVien(int id);
+        public List<PERSONAL> getBirthDay(int id);
+        public List<PERSONAL> getBirthDayInform(int month, int date);
+        public List<ModelViewHuman> getHiringDay(int id);
+        public List<ModelViewHuman> getHiringDayInform(int month, int date);
         public PERSONAL Search(int id);
         public void Add(ModelViewHuman request);
         public void Update(ModelViewHuman request);

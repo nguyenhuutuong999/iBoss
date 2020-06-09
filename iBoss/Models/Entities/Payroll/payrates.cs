@@ -14,13 +14,17 @@ namespace iBoss.Models.Entities.Payroll
         [Key]
         [DisplayName("ID")]
         public int idPayRates { get; set; }
-        [DisplayName("")]
+        [DisplayName("Pay Rate Name")]
         public string PayRateName { get; set; }
         [DisplayName("Value")]
         public decimal Value { get; set; }
+        [DisplayName("Tax Percentage")]
         public decimal TaxPercentage { get; set; }
+        [DisplayName("Pay Type")]
         public int PayType { get; set; }
+        [DisplayName("Pay Amount")]
         public decimal PayAmount { get; set; }
+        [DisplayName("PT Level C")]
         public decimal PTLevelC { get; set; }
     }
 }

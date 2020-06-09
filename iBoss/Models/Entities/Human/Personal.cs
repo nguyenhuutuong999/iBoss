@@ -13,27 +13,31 @@ namespace iBoss.Models.Entities.Human
         [Key]
         public int PERSONAL_ID { get; set; }
 
-        
+
         [DisplayName("ID")]
         public int EMPLOYEE_ID { get; set; }
         [DisplayName("FIRST NAME")]
         public string CURRENT_FIRST_NAME { get; set; }
         [DisplayName("LAST NAME")]
         public string CURRENT_LAST_NAME { get; set; }
-       
+        [DisplayName("BIRTH DATE")]
         [DataType(DataType.Date)]
         public DateTime? BIRTH_DATE { get; set; }
+        [DisplayName("SECURITY NUMBER")]
         public string SOCIAL_SECURITY_NUMBER { get; set; }
         [DisplayName("ADDRESS")]
         public string CURRENT_ADDRESS_1 { get; set; }
 
         [DisplayName("GENDER")]
         public bool CURRENT_GENDER { get; set; }
+        [DisplayName("PHONE NUMBER")]
         public string CURRENT_PHONE_NUMBER { get; set; }
+        [DisplayName("MARITAL STATUS")]
         public string CURRENT_MARITAL_STATUS { get; set; }
+        [DisplayName("EMAIL")]
         public string CURRENT_PERSONAL_EMAIL { get; set; }
 
-      //  public virtual BenefitPlans BenefitPlan { get; set; }
+        //  public virtual BenefitPlans BenefitPlan { get; set; }
         //public EMPLOYEMENT EMPLOYEMENT { get; set; }
     }
 }

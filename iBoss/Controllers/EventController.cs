@@ -22,10 +22,16 @@ namespace iBoss.Controllers
             _managePayroll = nanagePayroll;
             _manageHuman = manageHuman;
         }
-        
+        [Route("event")]
         public IActionResult Index()
         {
-
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
+            {
+                return RedirectToAction("Login", "User");
+            }
+           
+            ViewBag.Role = HttpContext.Session.GetString("Role");
+            ViewBag.Name = HttpContext.Session.GetString("Name");
             ViewBag.Current = "event";
             return View();
         }
@@ -38,19 +44,56 @@ namespace iBoss.Controllers
             }
             else
             {
-               
-                var nv = _manageHuman.getBirthDayNhanVien(id);
-               
+                var nv = _manageHuman.getBirthDay(id);
                 return Json(nv);
             }
           
         }
-        
-       
+
         [HttpPost]
-        public IActionResult Inform(int id)
+        public IActionResult HiringDay(int id)
         {
-            return Json(id);
+            if (id == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                var nv = _manageHuman.getHiringDay(id);
+                return Json(nv);
+            }
+
+        }
+
+
+        [HttpPost]
+        public IActionResult InformBirthday(int month, int date)
+        {
+            if (month == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                var nv = _manageHuman.getBirthDayInform(month,date);
+                return Json(nv);
+            }
+
+        }
+
+
+        [HttpPost]
+        public IActionResult InformHiringDay(int month, int date)
+        {
+            if (month == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                var nv = _manageHuman.getHiringDayInform(month, date);  
+                return Json(nv);
+            }
 
         }
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using iBoss.Application.Admin;
 using iBoss.Application.Human;
 using iBoss.Application.Payroll;
+using iBoss.Application.User;
 using iBoss.Models.EF;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,12 +33,16 @@ namespace iBoss
 
             services.AddDbContext<PayrollDbContext>(options => options.UseMySql(Configuration.GetConnectionString("mySQLConnectionString")));
             services.AddDbContext<HumanDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("sqlServerConnectionString")));
-
+            services.AddDbContext<UserDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("sqlServerUserConnectionString")));
+            
             services.AddMvc();
             services.AddTransient<IManagePayroll, ManagePayroll>();
             services.AddTransient<IManageHuman, ManageHuman>();
             services.AddTransient<IAdmin, Admin>();
+            services.AddTransient<IManageUser, ManageUser>();
 
+            services.AddSession();
+            services.AddDistributedMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,14 +62,14 @@ namespace iBoss
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Human}/{action=Index}/{id?}");
+                    pattern: "{controller=User}/{action=Login}/{id?}");
                 
             });
         }

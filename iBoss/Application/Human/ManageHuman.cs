@@ -17,7 +17,13 @@ namespace iBoss.Application.Human
         {
             _context = context;
         }
+        public (int, int) getGender()
+        {
+            int male = _context.PERSONALS.Count<PERSONAL>(p => p.CURRENT_GENDER == true);
+            int female = _context.PERSONALS.Count<PERSONAL>(p => p.CURRENT_GENDER == false);
 
+            return (male, female);
+        }
         public IEnumerable<ModelViewHuman> getAll()
         {
            //return  _context.PERSONALS.ToList<PERSONAL>();
@@ -146,15 +152,75 @@ namespace iBoss.Application.Human
         //}
         
        
-       
-        public List<PERSONAL> getBirthDayNhanVien(int id)
+       //inform Birthday 
+        public List<PERSONAL> getBirthDay(int id)
         {
             return _context.PERSONALS.FromSqlRaw("SELECT * FROM PERSONAL WHERE MONTH(BIRTH_DATE) = '" + id + "'").ToList<PERSONAL>();
+        }
+        public List<PERSONAL> getBirthDayInform(int month, int date)
+        {
+            return _context.PERSONALS.FromSqlRaw("SELECT * FROM PERSONAL WHERE( MONTH(BIRTH_DATE) = '" + month + "' AND  DAY(BIRTH_DATE) = '" + date + "')").ToList<PERSONAL>();
+        }
+
+        // Universary of Day
+        public List<ModelViewHuman> getHiringDay(int id)
+        {
+            var data = _context.PERSONALS.Join(
+                _context.EMPLOYMENTS,
+
+                canhan => canhan.EMPLOYEE_ID,
+                nhanvien => nhanvien.EMPLOYMENT_ID,
+                (canhan, nhanvien) => new ModelViewHuman
+                {
+                    EMPLOYEE_ID = canhan.EMPLOYEE_ID,
+                    CURRENT_FIRST_NAME = canhan.CURRENT_FIRST_NAME,
+                    CURRENT_LAST_NAME = canhan.CURRENT_LAST_NAME,
+                    BIRTH_DATE = canhan.BIRTH_DATE,
+                    SOCIAL_SECURITY_NUMBER = canhan.SOCIAL_SECURITY_NUMBER,
+                    CURRENT_ADDRESS_1 = canhan.CURRENT_ADDRESS_1,
+                    CURRENT_GENDER = canhan.CURRENT_GENDER,
+                    CURRENT_MARITAL_STATUS = canhan.CURRENT_MARITAL_STATUS,
+                    CURRENT_PHONE_NUMBER = canhan.CURRENT_PHONE_NUMBER,
+                    CURRENT_PERSONAL_EMAIL = canhan.CURRENT_PERSONAL_EMAIL,
+                    HIRE_DATE_FOR_WORKING = nhanvien.HIRE_DATE_FOR_WORKING,
+                    NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH = nhanvien.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH,
+                }
+                ).Where(c => c.HIRE_DATE_FOR_WORKING.Value.Month == id).ToList();
+            return data;
+        }
+        public List<ModelViewHuman> getHiringDayInform(int month, int date)
+        {
+            //return _context.PERSONALS.FromSqlRaw("SELECT * FROM EMPLOYMENT WHERE( MONTH(HIRE_DATE_FOR_WORKING) = '" + month + "' AND  DAY(HIRE_DATE_FOR_WORKING) = '" + date + "')").ToList<PERSONAL>();
+            var data = _context.PERSONALS.Join(
+                _context.EMPLOYMENTS,
+
+                canhan => canhan.EMPLOYEE_ID,
+                nhanvien => nhanvien.EMPLOYMENT_ID,
+                (canhan, nhanvien) => new ModelViewHuman
+                {
+                    EMPLOYEE_ID = canhan.EMPLOYEE_ID,
+                    CURRENT_FIRST_NAME = canhan.CURRENT_FIRST_NAME,
+                    CURRENT_LAST_NAME = canhan.CURRENT_LAST_NAME,
+                    BIRTH_DATE = canhan.BIRTH_DATE,
+                    SOCIAL_SECURITY_NUMBER = canhan.SOCIAL_SECURITY_NUMBER,
+                    CURRENT_ADDRESS_1 = canhan.CURRENT_ADDRESS_1,
+                    CURRENT_GENDER = canhan.CURRENT_GENDER,
+                    CURRENT_MARITAL_STATUS = canhan.CURRENT_MARITAL_STATUS,
+                    CURRENT_PHONE_NUMBER = canhan.CURRENT_PHONE_NUMBER,
+                    CURRENT_PERSONAL_EMAIL = canhan.CURRENT_PERSONAL_EMAIL,
+                    HIRE_DATE_FOR_WORKING = nhanvien.HIRE_DATE_FOR_WORKING,
+                    NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH = nhanvien.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH,
+                }
+
+                ).Where(c => c.HIRE_DATE_FOR_WORKING.Value.Month == month && c.HIRE_DATE_FOR_WORKING.Value.Day == date).ToList();
+            return data;
         }
 
         public PERSONAL Search(int id)
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }

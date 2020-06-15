@@ -27,24 +27,44 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+    
     <style>
 
+        :root {
+            --background: rgba(233, 227, 227, 0.45);
+            --font-color: #353535;
+            --main-background: white;
+            --gradient-background: linear-gradient(90deg, rgba(194, 179, 179, 0.45), rgba(255, 255, 255, 0.45));
+            --shadown: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03);
+        }
+
+        [data-theme="dark"] {
+            --background: #424242;
+            --font-color: #e1e1ff;
+            --main-background: #2c2c2c;
+            --gradient-background: linear-gradient(90deg, #282828, #4a4a4a);
+            --shadown: 0 0.46875rem 2.1875rem rgba(255, 255, 255, 0.45);
+        }
         body {
             max-width: 100%;
             height: 100%;
             margin: 0px;
             padding: 0px;
             top: 0;
-            background: rgba(233, 227, 227, 0.45);
+            background: var( --background);
             font-family: 'Roboto', sans-serif;
+            color: var(--font-color);
         }
-
+        .bg-white {
+            background: var( --main-background) !important;
+        }
         nav {
             width: 100%;
             position: fixed;
             margin: 0;
             z-index: 1;
-            box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03), 0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03), 0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05), 0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03)
+            box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03), 0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03), 0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05), 0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+            padding: 8px;
         }
 
         .main-page {
@@ -55,9 +75,9 @@
         }
 
         .side-bar {
-            background: rgba(238, 234, 234, 0.45);
+            background: var( --background);
             max-height: 100%;
-            box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03);
+            box-shadow: var( --shadown);
             color: black;
             margin-top: 50px;
             height: 100vh;
@@ -65,11 +85,16 @@
         }
 
             .side-bar a {
-                color: rgb(58, 52, 52);
+                color: var( --font-color);
                 text-decoration: none;
                 list-style: none;
             }
-
+        .table {
+            color: var( --font-color);
+        }
+        a {
+            color: var( --font-color);
+        }
         .button-link {
             width: 100%;
             height: 24%;
@@ -77,7 +102,7 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            background: rgb(255, 255, 255);
+            background: var(--main-background);
             border-radius: 0 10px 10px 0;
             border-bottom: 1px rgb(14, 12, 12);
             z-index: 1;
@@ -85,15 +110,15 @@
         }
 
             .button-link:hover {
-                background-color: rgba(210, 207, 221, 0.45);
-                background-image: linear-gradient(90deg, rgba(194, 179, 179, 0.45), rgba(255, 255, 255, 0.45));
+                background: var( --background);
+                background-image: var(--gradient-background);
                 transition: background-color 1s;
             }
 
 
         .active {
-            background-color: rgba(210, 207, 221, 0.45);
-            background-image: linear-gradient(90deg, rgba(194, 179, 179, 0.45), rgba(255, 255, 255, 0.45));
+            background: var( --background);
+            background-image: var(--gradient-background);
         }
 
         .main-content {
@@ -103,7 +128,7 @@
         }
 
         .list {
-            background: white;
+            background: var(--main-background);
             height: 80vh;
             margin: 90px 10px;
         }
@@ -114,12 +139,16 @@
             max-width: 35%;
             height: 60vh;
             margin: 90px 0 10px 10px;
+            color: var( --font-color);
+            background: var(--main-background);
         }
 
         #genderChart {
             padding: 0;
             margin: 0;
             height: 50%;
+            color: var( --font-color);
+            background: var(--main-background);
         }
 
         #numberChart {
@@ -130,13 +159,13 @@
         }
 
         .search-container {
-            margin: 5px 0 10px 18%;
+            margin: 0px 0 10px 18%;
             width: 400px;
         }
 
             .search-container input[type=text] {
                 padding: 10px;
-                margin-top: 8px;
+                margin-top: 0px;
                 font-size: 17px;
                 border-radius: 50px;
                 z-index: 1;
@@ -149,7 +178,7 @@
 
             .search-container input[type=number] {
                 padding: 10px;
-                margin-top: 8px;
+                margin-top: 2px;
                 font-size: 17px;
                 border-radius: 50px;
                 z-index: 1;
@@ -163,7 +192,7 @@
             .search-container button {
                 float: right;
                 padding: 8px 14px;
-                margin-top: 10px;
+                margin-top: 3px;
                 margin-right: 10px;
                 margin-left: 0px;
                 z-index: 2;
@@ -179,8 +208,9 @@
                 }
 
         .switch {
-            top: 8px;
-            margin-left: 92%;
+            position:fixed;
+            margin-top: 46%;
+            margin-left: 94%;
         }
 
         .name-logo {
@@ -196,11 +226,10 @@
         }
 
         .item-nav {
-            width: 10%;
             position: absolute;
-            margin-top: 15px;
-            width: 60px;
-            height: 34px;
+            z-index: 2;
+            width: 70px;
+            height: 70px;
         }
 
         .switch input {
@@ -210,31 +239,33 @@
         }
 
         .slider {
+            padding: 11px;
             position: absolute;
             cursor: pointer;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgb(240, 230, 230);
+            background-color: rgb(228, 222, 222);
             -webkit-transition: .4s;
             transition: .4s;
         }
 
-            .slider:before {
-                position: absolute;
-                content: "";
-                height: 26px;
-                width: 26px;
-                left: 4px;
-                bottom: 4px;
-                background-color: white;
-                -webkit-transition: .4s;
-                transition: .4s;
-            }
+        /* .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        } */
 
         input:checked + .slider {
-            background-color: rgb(93, 107, 119);
+            background-color: rgb(131, 147, 161);
+            transform: rotate(360deg);
         }
 
         input:focus + .slider {
@@ -249,11 +280,11 @@
 
         /* Rounded sliders */
         .slider.round {
-            border-radius: 34px;
+            border-radius: 50%;
         }
 
             .slider.round:before {
-                border-radius: 50%;
+                border-radius: 10%;
             }
 
         .main-hel ul li {
@@ -274,21 +305,24 @@
                 font-size: 20px;
             }
 
-       
+        .form-control {
+            background: var(--background);
+        }
 
         .box-block {
-            box-shadow: 500px 50px 50px rgba(4, 9, 20, 0.03);
+            background: var( --main-background);
+            color: var(--font-color);
+            box-shadow: var( --shadown);
             left: 81%;
             top: 9%;
             width: 290px;
-            background-color: white;
+           
             position: fixed;
             display: none;
             padding: 10px;
         }
-
-        li {
-            list-style: none;
+        .dropdown-item {
+            color: var(--font-color);
         }
 
         .list-birthday a {
@@ -298,7 +332,7 @@
         }
 
             .list-birthday a:hover {
-                background: #F5F2F2;
+                background: var( --main-background);
             }
 
         .text {
@@ -330,12 +364,14 @@
                     <button type="submit" style="border-radius: 50px;"><i class="fa fa-search"></i></button>
                     @*<input type="submit" value="Filter" />*@
                 </form>
+
             </div>
+            <h2 style="margin-left:10%; width:500px">Welcome back, @ViewBag.name</h2>
             <label class="item-nav switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
+                <input type="checkbox" id="darkmode">
+                <span class="slider round" style="color: rgb(255, 255, 255);"> <i id="toggle" class="far fa-sun fa-3x"></i></span>
             </label>
-            <a   onclick="confirmLogout()" class="item-nav exit-button">
+            <a onclick="confirmLogout()" class="item-nav exit-button">
                 <i class="fas fa-sign-out-alt fa-3x" style="color:rgb(176, 184, 190)"></i>
             </a>
             <a href="#" class=" item-nav notification" id="inform">
@@ -348,7 +384,6 @@
                 </h6>
                 <hr style="margin: 2px 0 10px 0" />
                 <ul class="list-birthday" id="inform-birthday">
-                    
                 </ul>
                 <a class="dropdown-item text-center small text-gray-500" href="event">Show More</a>
             </div>
@@ -473,7 +508,6 @@
                     '                    </li>';
             });
 
-
             $("#inform-birthday").append(rows);
 
 
@@ -520,4 +554,48 @@
             }
         })
     })
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#darkmode").change(function () {
+            if ($("i").hasClass("fa-sun")) {
+                $("#toggle").removeClass("fa-sun");
+                $("#toggle").addClass("fa-moon");
+            } else {
+                $("#toggle").removeClass("fa-moon");
+                $("#toggle").addClass("fa-sun");
+            }
+
+
+        });
+    });
+</script>
+
+<script>
+    const toggleSwitch = document.querySelector('.switch input[type="checkbox"]');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        if (currentTheme === 'dark') {
+            toggleSwitch.checked = true;
+        }
+    }
+
+    function switchTheme(e) {
+        if (e.target.checked) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+
+        }
+        else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    toggleSwitch.addEventListener('change', switchTheme, false);
+
 </script>

@@ -55,7 +55,7 @@ namespace iBoss.Application.Payroll
             {
 
                 idEmployee = idE,
-                EmployeeNumber = idE,
+                
                 LastName = request.LastName,
                 FirstName = request.FirstName,
                 SSN = request.SSN,

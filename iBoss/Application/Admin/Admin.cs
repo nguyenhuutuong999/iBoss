@@ -60,7 +60,7 @@ namespace iBoss.Application.Admin
             var data1 = data.Join(
             _contextPayroll.employees,
                 human => human.EMPLOYEE_ID,
-                payroll => payroll.EmployeeNumber,
+                payroll => payroll.idEmployee,
                 (human, payroll) => new ModelViewAdmin
                 {
                     EMPLOYEE_ID = human.EMPLOYEE_ID,
@@ -119,21 +119,21 @@ namespace iBoss.Application.Admin
 
         public void Add(ModelViewAdmin request)
         {
-            var id = _contextHuman.EMPLOYMENTS.Count<EMPLOYMENT>() + 1;
+            //var id = _contextHuman.EMPLOYMENTS.Count<EMPLOYMENT>() + 1;
             EMPLOYMENT employment = new EMPLOYMENT
             {
-                EMPLOYMENT_ID = id,
+                //EMPLOYMENT_ID = id,
                 HIRE_DATE_FOR_WORKING = request.HIRE_DATE_FOR_WORKING,
                 EMPLOYMENT_STATUS = request.EMPLOYMENT_STATUS,
             };
             _contextHuman.EMPLOYMENTS.Add(employment);
             _contextHuman.SaveChanges();
-
-
+            var id = _contextHuman.EMPLOYMENTS.FromSqlRaw("SELECT TOP 1 * FROM EMPLOYMENT ORDER BY EMPLOYMENT_ID DESC ").FirstOrDefault();
+           //var id =  _contextHuman.EMPLOYMENTS.Last<EMPLOYMENT>();
 
             PERSONAL personal = new PERSONAL
             {
-                EMPLOYEE_ID = id,
+                EMPLOYEE_ID = id.EMPLOYMENT_ID,
                 CURRENT_FIRST_NAME = request.CURRENT_FIRST_NAME,
                 CURRENT_LAST_NAME = request.CURRENT_LAST_NAME,
                 BIRTH_DATE = request.BIRTH_DATE,
@@ -149,11 +149,11 @@ namespace iBoss.Application.Admin
 
             employee employee = new employee
             {
-                EmployeeNumber = id,
-                idEmployee = id,
+                
+                idEmployee = id.EMPLOYMENT_ID,
                 LastName = request.CURRENT_LAST_NAME,
                 FirstName = request.CURRENT_FIRST_NAME,
-                PayRatesidPayRates = id,
+                PayRatesidPayRates = request.PayRatesidPayRates,
                 VacationDays = request.VacationDays,
             };
             _contextPayroll.employees.Add(employee);

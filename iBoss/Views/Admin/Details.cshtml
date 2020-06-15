@@ -3,113 +3,114 @@
 @{
     ViewData["Title"] = "Details";
 }
+    <div class="list col-sm-9">
+        <h1>Details</h1>
 
-<h1>Details</h1>
-
-<div>
-    <h4>ModelViewAdmin</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CURRENT_FIRST_NAME)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CURRENT_FIRST_NAME)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CURRENT_LAST_NAME)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CURRENT_LAST_NAME)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BIRTH_DATE)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BIRTH_DATE)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CURRENT_ADDRESS_1)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CURRENT_ADDRESS_1)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SOCIAL_SECURITY_NUMBER)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SOCIAL_SECURITY_NUMBER)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CURRENT_GENDER)
-        </dt>
-        <dd class="col-sm-10">
-            @if (Model.CURRENT_GENDER)
-            {
-                <label>Male</label>
-            }
-            else
-            {
-                <label>Female</label>
-            }
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CURRENT_PHONE_NUMBER)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CURRENT_PHONE_NUMBER)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CURRENT_MARITAL_STATUS)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CURRENT_MARITAL_STATUS)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CURRENT_PERSONAL_EMAIL)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CURRENT_PERSONAL_EMAIL)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EMPLOYMENT_STATUS)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EMPLOYMENT_STATUS)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HIRE_DATE_FOR_WORKING)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HIRE_DATE_FOR_WORKING)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PayRate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PayRate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PayRatesidPayRates)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PayRatesidPayRates)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VacationDays)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VacationDays)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.EMPLOYEE_ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+        <div>
+            <h4>ModelViewAdmin</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CURRENT_FIRST_NAME)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CURRENT_FIRST_NAME)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CURRENT_LAST_NAME)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CURRENT_LAST_NAME)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.BIRTH_DATE)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.BIRTH_DATE)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CURRENT_ADDRESS_1)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CURRENT_ADDRESS_1)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.SOCIAL_SECURITY_NUMBER)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.SOCIAL_SECURITY_NUMBER)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CURRENT_GENDER)
+                </dt>
+                <dd class="col-sm-10">
+                    @if (Model.CURRENT_GENDER)
+                    {
+                        <label>Male</label>
+                    }
+                    else
+                    {
+                        <label>Female</label>
+                    }
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CURRENT_PHONE_NUMBER)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CURRENT_PHONE_NUMBER)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CURRENT_MARITAL_STATUS)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CURRENT_MARITAL_STATUS)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CURRENT_PERSONAL_EMAIL)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CURRENT_PERSONAL_EMAIL)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.EMPLOYMENT_STATUS)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.EMPLOYMENT_STATUS)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.HIRE_DATE_FOR_WORKING)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.HIRE_DATE_FOR_WORKING)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.PayRate)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.PayRate)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.PayRatesidPayRates)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.PayRatesidPayRates)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.VacationDays)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.VacationDays)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.EMPLOYEE_ID">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+        </div>

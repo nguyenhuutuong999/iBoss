@@ -4,93 +4,95 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class=" list col-sm-9">
+    <h1>Details</h1>
 
-<div>
-    <h4>ModelViewPayroll</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EmployeeNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EmployeeNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SSN)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SSN)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PayRate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PayRate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PayRatesidPayRates)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PayRatesidPayRates)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VacationDays)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VacationDays)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PayRateName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PayRateName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Value)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Value)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TaxPercentage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TaxPercentage)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PayType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PayType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PayAmount)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PayAmount)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PTLevelC)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PTLevelC)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.idEmployee">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <h4>ModelViewPayroll</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EmployeeNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EmployeeNumber)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SSN)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SSN)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PayRate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PayRate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PayRatesidPayRates)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PayRatesidPayRates)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.VacationDays)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.VacationDays)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PayRateName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PayRateName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Value)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Value)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TaxPercentage)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TaxPercentage)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PayType)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PayType)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PayAmount)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PayAmount)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PTLevelC)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PTLevelC)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.idEmployee">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+    </div>

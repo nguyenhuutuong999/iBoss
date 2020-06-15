@@ -52,6 +52,24 @@ namespace iBoss.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(ModelViewHuman request)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _manageHuman.Add(request);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
         //[HttpGet]
         //public IActionResult Edit(int id)
         //{
@@ -72,23 +90,7 @@ namespace iBoss.Controllers
 
         //    return View();
         //}
-        //[HttpGet]
-        //public IActionResult Create()
-        //{
 
-        //    return View();
-        //}
-        //[HttpPost]
-        //public IActionResult Create(ModelViewHuman request)
-        //{
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        _manageHuman.Add(request);
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View();
-        //}
         // [HttpGet]
         // public IActionResult Delete(int id)
         // {

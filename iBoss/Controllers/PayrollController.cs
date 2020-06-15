@@ -48,22 +48,22 @@ namespace iBoss.Controllers
             return View(model);
         }
 
-        //[HttpGet]
-        //public IActionResult Create()
-        //{
-        //    ViewBag.getPayRate = _managePayroll.getAllPayrate();
-        //    return View();
-        //}
-        //[HttpPost]
-        //public IActionResult Create(ModelViewPayroll request)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //      _managePayroll.Add(request);
-        //      return RedirectToAction("Index");
-        //    }
-        //    return View();
-        //}
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.getPayRate = _managePayroll.getAllPayrate();
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(ModelViewPayroll request)
+        {
+            if (ModelState.IsValid)
+            {
+                _managePayroll.Add(request);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
 
         //[HttpGet]
         //public IActionResult Edit(int id)

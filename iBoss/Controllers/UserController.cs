@@ -23,9 +23,11 @@ namespace iBoss.Controllers
         //[Route("login")]
         [HttpGet]
         public IActionResult Login()
-        {   if(Request.Cookies["LastLoggedInTime"] != null)
+        {   
+            if(Request.Cookies["LastLoggedInTime"] != null)
             ViewBag.LTLD = Request.Cookies["LastLoggedInTime"].ToString();
             return View();
+            
         }
         //[Route("login")]
         [HttpPost]
@@ -42,6 +44,8 @@ namespace iBoss.Controllers
             HttpContext.Session.SetString("Username", user.USERNAME);
             HttpContext.Session.SetString("Role", user.ROLE);
             HttpContext.Session.SetString("Name", user.NAME);
+
+            ViewBag.name = HttpContext.Session.GetString("Name");
 
             //get last time Login in
             Response.Cookies.Append("LastLoggedInTime", DateTime.Now.ToString());

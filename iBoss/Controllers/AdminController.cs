@@ -28,9 +28,11 @@ namespace iBoss.Controllers
             ViewBag.Male = value.Item1;
             ViewBag.Female = value.Item2;
 
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username"))){
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
+            {
                 return RedirectToAction("Login", "User");
-            }else if(HttpContext.Session.GetString("Role").ToString() != "Admin")
+            }
+            else if (HttpContext.Session.GetString("Role").ToString() != "Admin")
             {
                 return RedirectToAction("Error");
             }

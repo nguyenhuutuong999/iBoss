@@ -40,11 +40,23 @@ namespace iBoss.Controllers
         [HttpGet]
         public IActionResult Search()
         {
-            var keyWord = Request.Query["search"];
 
+            ModelViewHuman getModel;
+            var keyWord = Request.Query["search"];
+            
             ViewBag.key = keyWord;
-            ModelViewHuman getModel = _manageHuman.Detail(Int32.Parse(keyWord));
-            return  View(getModel);
+            try
+            {
+                 getModel = _manageHuman.Detail(Int32.Parse(keyWord));
+            }
+            catch(Exception e)
+            {
+                @ViewBag.Search = "Not Found";
+                return View(null);
+            }
+                @ViewBag.Search = "Result";
+
+            return View(getModel);
         }
        
 
